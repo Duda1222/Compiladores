@@ -70,8 +70,8 @@ docker compose version
 Clone o repositório e, na raiz dele, suba os contêineres:
 
 ```bash
-git clone <URL-DO-REPOSITORIO>
-cd compilador-educacional
+git clone https://github.com/Duda1222/Compiladores
+cd Compiladores
 docker compose up --build -d
 ```
 
