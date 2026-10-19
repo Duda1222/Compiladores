@@ -1,0 +1,12 @@
+{
+  "name": "compilador-educacional-frontend",
+  "private": true,
+  "type": "module",
+  "description": "Frontend estático do Compilador Educacional (apenas os testes usam Node).",
+  "scripts": {
+    "test": "node --test \"tests/*.test.js\""
+  },
+  "devDependencies": {
+    "jsdom": "^25.0.1"
+  }
+}
