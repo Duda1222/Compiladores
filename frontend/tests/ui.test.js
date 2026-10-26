@@ -5,12 +5,12 @@ import assert from "node:assert/strict";
 import { iniciar } from "../js/app.js";
 import { EXEMPLOS } from "../js/exemplos.js";
 import { MSG_COMUNICACAO, MSG_INESPERADO } from "../js/api.js";
-import { criarDom, fetchFalso, respostaFalsa, textoDe } from "./ajudantes.js";
+import { FIXTURES, criarDom, fetchFalso, respostaFalsa, textoDe } from "./ajudantes.js";
 
 function montar(fetchFn) {
   const dom = criarDom();
   const doc = dom.window.document;
-  const f = fetchFn ?? fetchFalso(() => respostaFalsa(200, { recebido: true, mensagem: "Código recebido com sucesso.", linhas: 1, caracteres: 1 }));
+  const f = fetchFn ?? fetchFalso(() => respostaFalsa(200, FIXTURES.valido.resposta));
   const api = iniciar(doc, { fetchFn: f });
   return {
     dom,
@@ -164,17 +164,13 @@ test("clicar no botão dispara o envio", async () => {
 });
 
 test("sucesso mostra a mensagem do backend, linhas e caracteres", async () => {
-  const f = fetchFalso(() =>
-    respostaFalsa(200, { recebido: true, mensagem: "Código recebido com sucesso.", linhas: 3, caracteres: 31 })
-  );
-  const ctx = montar(f);
-  ctx.codigo.value = "a = 1\nb = 2\nc = 3\n";
+  const ctx = montar();
+  ctx.codigo.value = FIXTURES.valido.codigo;
   await ctx.api.aoAnalisar();
   const t = textoDe(ctx.resultado);
-  assert.match(t, /Código recebido com sucesso\./);
-  assert.match(t, /Linhas: 3/);
-  assert.match(t, /Caracteres: 31/);
-  assert.match(t, /próximas etapas/);
+  assert.match(t, /Análise léxica concluída sem erros\./);
+  assert.match(t, /3 linhas/);
+  assert.match(t, new RegExp(`${FIXTURES.valido.codigo.length} caracteres`));
   assert.ok(ctx.resultado.classList.contains("resultado--sucesso"));
 });
 
@@ -270,7 +266,7 @@ test("depois de um erro, uma nova análise válida funciona (regressão)", async
   ctx.codigo.value = "x = 1";
   await ctx.api.aoAnalisar();
   assert.equal(ctx.f.chamadas.length, 1);
-  assert.match(textoDe(ctx.resultado), /Código recebido com sucesso\./);
+  assert.match(textoDe(ctx.resultado), /Análise léxica concluída sem erros\./);
 });
 
 test("o código do usuário nunca é inserido como HTML na área de resultados", async () => {

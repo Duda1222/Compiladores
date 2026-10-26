@@ -10,7 +10,7 @@
   <header class="topo">
     <div>
       <h1>Compilador Educacional</h1>
-      <p class="topo__sub">Análise léxica e sintática passo a passo para estudantes de Computação</p>
+      <p class="topo__sub">Veja como o scanner transforma código em tokens, passo a passo</p>
     </div>
     <p class="selo" id="linguagem">Linguagem analisada: <strong>Python</strong> (subconjunto)</p>
   </header>
@@ -46,12 +46,38 @@ while x &gt; 0:
 
     <section class="cartao" id="resultados" aria-labelledby="titulo-resultados">
       <h2 id="titulo-resultados">Resultados</h2>
+
+      <details class="ajuda" id="ajuda" open>
+        <summary>O que é um token? E um lexema?</summary>
+        <div class="ajuda__corpo">
+          <p>
+            O <strong>scanner</strong> (analisador léxico) é a primeira fase de um compilador:
+            ele lê o programa como uma fila de caracteres e o separa em pedaços com significado.
+          </p>
+          <ul>
+            <li><strong>Lexema</strong>: o trecho exato do texto, como <code>while</code>, <code>x</code> ou <code>3.14</code>.</li>
+            <li><strong>Token</strong>: o lexema já classificado, com tipo e posição. Exemplo: <code>3.14</code> → <code>LITERAL_DECIMAL</code>, linha 2, coluna 5.</li>
+          </ul>
+          <p>
+            Em Python a <strong>indentação</strong> também importa. Por isso o scanner gera os tokens
+            <code>NEWLINE</code> (↵), <code>INDENT</code> (→) e <code>DEDENT</code> (←).
+          </p>
+          <ol>
+            <li>Escolha um exemplo (ou escreva o seu) e clique em <strong>Analisar código</strong>.</li>
+            <li>Veja o código colorido por categoria e a tabela de tokens.</li>
+            <li>Use <strong>Próximo</strong> para acompanhar o scanner token por token.</li>
+            <li>Teste o exemplo <em>Com erros léxicos</em> para ver como os erros são apontados.</li>
+          </ol>
+          <p class="nota">Nesta etapa só há análise léxica. A análise sintática (estrutura do programa) será a Etapa 4.</p>
+        </div>
+      </details>
+
       <div id="resultado-conteudo" class="resultado resultado--vazio" aria-live="polite"></div>
     </section>
   </main>
 
   <footer class="rodape">
-    <p>Compiladores · Trabalho 2 · Autora: Maria Eduarda Almeida Lopes</p>
+    <p>Compiladores · Trabalho 3 (análise léxica) · Autora: Maria Eduarda Almeida Lopes</p>
   </footer>
 
   <script type="module" src="js/app.js"></script>

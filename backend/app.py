@@ -5,8 +5,9 @@ Endpoints:
   GET  /api/hello     -> mensagem da Etapa 1 (mantida para regressão)
   POST /api/analisar  -> recebe o código-fonte e devolve uma resposta estruturada
 
-Nesta etapa o backend apenas RECEBE e VALIDA o código. As análises léxica,
-sintática e semântica serão adicionadas nas próximas etapas.
+Etapa 3: depois de validar a entrada, o backend executa o analisador léxico
+(scanner) e devolve tokens, erros léxicos e avisos. As análises sintática e
+semântica serão adicionadas nas próximas etapas.
 """
 
 import logging
@@ -14,6 +15,7 @@ import logging
 from flask import Flask, jsonify, request
 from werkzeug.exceptions import HTTPException
 
+from scanner import analisar_lexico
 from validacao import validar_corpo
 
 app = Flask(__name__)
@@ -44,11 +46,24 @@ def analisar():
         return erro(resultado.status, resultado.erro, resultado.mensagem)
 
     codigo = corpo["codigo"]
+    lexico = analisar_lexico(codigo)
+    resposta = lexico.como_dict()
+
+    if lexico.sucesso:
+        mensagem = "Análise léxica concluída sem erros."
+    elif lexico.total_erros == 1:
+        mensagem = "Análise léxica concluída com 1 erro léxico."
+    else:
+        mensagem = f"Análise léxica concluída com {lexico.total_erros} erros léxicos."
+
+    # Um programa com erros léxicos é uma resposta válida (HTTP 200): o pedido
+    # foi processado e o resultado diz que a análise falhou ("sucesso": false).
     return jsonify(
         recebido=True,
-        mensagem="Código recebido com sucesso.",
+        mensagem=mensagem,
         linhas=len(codigo.splitlines()),
         caracteres=len(codigo),
+        **resposta,
     )
 
 

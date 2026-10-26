@@ -5,6 +5,7 @@ import pytest
 
 # Permite importar app.py e validacao.py a partir da pasta backend/.
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from app import app as flask_app  # noqa: E402
 

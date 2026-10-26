@@ -1,0 +1,646 @@
+{
+  "comentarios": {
+    "codigo": "# so um comentario\n",
+    "resposta": {
+      "avisos": [],
+      "caracteres": 19,
+      "erros": [],
+      "linhas": 1,
+      "mensagem": "Análise léxica concluída sem erros.",
+      "recebido": true,
+      "resumo": {
+        "erros_omitidos": 0,
+        "por_tipo": {
+          "FIM_DE_ARQUIVO": 1
+        },
+        "total_erros": 0,
+        "total_tokens": 1
+      },
+      "sucesso": true,
+      "tokens": [
+        {
+          "coluna": 1,
+          "lexema": "",
+          "linha": 2,
+          "tipo": "FIM_DE_ARQUIVO"
+        }
+      ]
+    }
+  },
+  "decimais": {
+    "codigo": "a = 2.5\nb = 3 >= a\n",
+    "resposta": {
+      "avisos": [],
+      "caracteres": 19,
+      "erros": [],
+      "linhas": 2,
+      "mensagem": "Análise léxica concluída sem erros.",
+      "recebido": true,
+      "resumo": {
+        "erros_omitidos": 0,
+        "por_tipo": {
+          "FIM_DE_ARQUIVO": 1,
+          "IDENTIFICADOR": 3,
+          "LITERAL_DECIMAL": 1,
+          "LITERAL_INTEIRO": 1,
+          "NEWLINE": 2,
+          "OPERADOR_ATRIBUICAO": 2,
+          "OPERADOR_RELACIONAL": 1
+        },
+        "total_erros": 0,
+        "total_tokens": 11
+      },
+      "sucesso": true,
+      "tokens": [
+        {
+          "coluna": 1,
+          "lexema": "a",
+          "linha": 1,
+          "tipo": "IDENTIFICADOR"
+        },
+        {
+          "coluna": 3,
+          "lexema": "=",
+          "linha": 1,
+          "tipo": "OPERADOR_ATRIBUICAO"
+        },
+        {
+          "coluna": 5,
+          "lexema": "2.5",
+          "linha": 1,
+          "tipo": "LITERAL_DECIMAL"
+        },
+        {
+          "coluna": 8,
+          "lexema": "\n",
+          "linha": 1,
+          "tipo": "NEWLINE"
+        },
+        {
+          "coluna": 1,
+          "lexema": "b",
+          "linha": 2,
+          "tipo": "IDENTIFICADOR"
+        },
+        {
+          "coluna": 3,
+          "lexema": "=",
+          "linha": 2,
+          "tipo": "OPERADOR_ATRIBUICAO"
+        },
+        {
+          "coluna": 5,
+          "lexema": "3",
+          "linha": 2,
+          "tipo": "LITERAL_INTEIRO"
+        },
+        {
+          "coluna": 7,
+          "lexema": ">=",
+          "linha": 2,
+          "tipo": "OPERADOR_RELACIONAL"
+        },
+        {
+          "coluna": 10,
+          "lexema": "a",
+          "linha": 2,
+          "tipo": "IDENTIFICADOR"
+        },
+        {
+          "coluna": 11,
+          "lexema": "\n",
+          "linha": 2,
+          "tipo": "NEWLINE"
+        },
+        {
+          "coluna": 1,
+          "lexema": "",
+          "linha": 3,
+          "tipo": "FIM_DE_ARQUIVO"
+        }
+      ]
+    }
+  },
+  "erros": {
+    "codigo": "preco = 10 @ 2\nvalor = 3.14.15\nnome = \"Ana\"\ny = 12abc\ndef f\n",
+    "resposta": {
+      "avisos": [
+        {
+          "coluna": 1,
+          "lexema": "def",
+          "linha": 5,
+          "mensagem": "'def' é palavra reservada do Python, mas ainda não faz parte do subconjunto. O scanner a reconhece; as próximas etapas poderão não aceitá-la.",
+          "tipo": "AVISO_FORA_DO_ESCOPO"
+        }
+      ],
+      "caracteres": 60,
+      "erros": [
+        {
+          "coluna": 12,
+          "lexema": "@",
+          "linha": 1,
+          "mensagem": "Caractere não reconhecido: '@'. Ele existe em Python, mas ainda não faz parte do subconjunto suportado.",
+          "tipo": "ERRO_LEXICO"
+        },
+        {
+          "coluna": 9,
+          "lexema": "3.14.15",
+          "linha": 2,
+          "mensagem": "Literal numérico malformado '3.14.15': literal com mais de um ponto decimal.",
+          "tipo": "ERRO_LEXICO"
+        },
+        {
+          "coluna": 8,
+          "lexema": "\"Ana\"",
+          "linha": 3,
+          "mensagem": "String \"Ana\" não reconhecida: strings ainda não fazem parte do subconjunto.",
+          "tipo": "ERRO_LEXICO"
+        },
+        {
+          "coluna": 5,
+          "lexema": "12abc",
+          "linha": 4,
+          "mensagem": "Literal numérico malformado '12abc': um número não pode ser seguido de letras (identificadores não começam com dígito).",
+          "tipo": "ERRO_LEXICO"
+        }
+      ],
+      "linhas": 5,
+      "mensagem": "Análise léxica concluída com 4 erros léxicos.",
+      "recebido": true,
+      "resumo": {
+        "erros_omitidos": 0,
+        "por_tipo": {
+          "FIM_DE_ARQUIVO": 1,
+          "IDENTIFICADOR": 5,
+          "LITERAL_INTEIRO": 2,
+          "NEWLINE": 5,
+          "OPERADOR_ATRIBUICAO": 4,
+          "PALAVRA_RESERVADA": 1
+        },
+        "total_erros": 4,
+        "total_tokens": 18
+      },
+      "sucesso": false,
+      "tokens": [
+        {
+          "coluna": 1,
+          "lexema": "preco",
+          "linha": 1,
+          "tipo": "IDENTIFICADOR"
+        },
+        {
+          "coluna": 7,
+          "lexema": "=",
+          "linha": 1,
+          "tipo": "OPERADOR_ATRIBUICAO"
+        },
+        {
+          "coluna": 9,
+          "lexema": "10",
+          "linha": 1,
+          "tipo": "LITERAL_INTEIRO"
+        },
+        {
+          "coluna": 14,
+          "lexema": "2",
+          "linha": 1,
+          "tipo": "LITERAL_INTEIRO"
+        },
+        {
+          "coluna": 15,
+          "lexema": "\n",
+          "linha": 1,
+          "tipo": "NEWLINE"
+        },
+        {
+          "coluna": 1,
+          "lexema": "valor",
+          "linha": 2,
+          "tipo": "IDENTIFICADOR"
+        },
+        {
+          "coluna": 7,
+          "lexema": "=",
+          "linha": 2,
+          "tipo": "OPERADOR_ATRIBUICAO"
+        },
+        {
+          "coluna": 16,
+          "lexema": "\n",
+          "linha": 2,
+          "tipo": "NEWLINE"
+        },
+        {
+          "coluna": 1,
+          "lexema": "nome",
+          "linha": 3,
+          "tipo": "IDENTIFICADOR"
+        },
+        {
+          "coluna": 6,
+          "lexema": "=",
+          "linha": 3,
+          "tipo": "OPERADOR_ATRIBUICAO"
+        },
+        {
+          "coluna": 13,
+          "lexema": "\n",
+          "linha": 3,
+          "tipo": "NEWLINE"
+        },
+        {
+          "coluna": 1,
+          "lexema": "y",
+          "linha": 4,
+          "tipo": "IDENTIFICADOR"
+        },
+        {
+          "coluna": 3,
+          "lexema": "=",
+          "linha": 4,
+          "tipo": "OPERADOR_ATRIBUICAO"
+        },
+        {
+          "coluna": 10,
+          "lexema": "\n",
+          "linha": 4,
+          "tipo": "NEWLINE"
+        },
+        {
+          "coluna": 1,
+          "lexema": "def",
+          "linha": 5,
+          "tipo": "PALAVRA_RESERVADA"
+        },
+        {
+          "coluna": 5,
+          "lexema": "f",
+          "linha": 5,
+          "tipo": "IDENTIFICADOR"
+        },
+        {
+          "coluna": 6,
+          "lexema": "\n",
+          "linha": 5,
+          "tipo": "NEWLINE"
+        },
+        {
+          "coluna": 1,
+          "lexema": "",
+          "linha": 6,
+          "tipo": "FIM_DE_ARQUIVO"
+        }
+      ]
+    }
+  },
+  "html": {
+    "codigo": "<b>x</b> = 1  # <script>alert(1)</script>\n",
+    "resposta": {
+      "avisos": [],
+      "caracteres": 42,
+      "erros": [],
+      "linhas": 1,
+      "mensagem": "Análise léxica concluída sem erros.",
+      "recebido": true,
+      "resumo": {
+        "erros_omitidos": 0,
+        "por_tipo": {
+          "FIM_DE_ARQUIVO": 1,
+          "IDENTIFICADOR": 3,
+          "LITERAL_INTEIRO": 1,
+          "NEWLINE": 1,
+          "OPERADOR_ARITMETICO": 1,
+          "OPERADOR_ATRIBUICAO": 1,
+          "OPERADOR_RELACIONAL": 4
+        },
+        "total_erros": 0,
+        "total_tokens": 12
+      },
+      "sucesso": true,
+      "tokens": [
+        {
+          "coluna": 1,
+          "lexema": "<",
+          "linha": 1,
+          "tipo": "OPERADOR_RELACIONAL"
+        },
+        {
+          "coluna": 2,
+          "lexema": "b",
+          "linha": 1,
+          "tipo": "IDENTIFICADOR"
+        },
+        {
+          "coluna": 3,
+          "lexema": ">",
+          "linha": 1,
+          "tipo": "OPERADOR_RELACIONAL"
+        },
+        {
+          "coluna": 4,
+          "lexema": "x",
+          "linha": 1,
+          "tipo": "IDENTIFICADOR"
+        },
+        {
+          "coluna": 5,
+          "lexema": "<",
+          "linha": 1,
+          "tipo": "OPERADOR_RELACIONAL"
+        },
+        {
+          "coluna": 6,
+          "lexema": "/",
+          "linha": 1,
+          "tipo": "OPERADOR_ARITMETICO"
+        },
+        {
+          "coluna": 7,
+          "lexema": "b",
+          "linha": 1,
+          "tipo": "IDENTIFICADOR"
+        },
+        {
+          "coluna": 8,
+          "lexema": ">",
+          "linha": 1,
+          "tipo": "OPERADOR_RELACIONAL"
+        },
+        {
+          "coluna": 10,
+          "lexema": "=",
+          "linha": 1,
+          "tipo": "OPERADOR_ATRIBUICAO"
+        },
+        {
+          "coluna": 12,
+          "lexema": "1",
+          "linha": 1,
+          "tipo": "LITERAL_INTEIRO"
+        },
+        {
+          "coluna": 42,
+          "lexema": "\n",
+          "linha": 1,
+          "tipo": "NEWLINE"
+        },
+        {
+          "coluna": 1,
+          "lexema": "",
+          "linha": 2,
+          "tipo": "FIM_DE_ARQUIVO"
+        }
+      ]
+    }
+  },
+  "tabulacao": {
+    "codigo": "if x:\n\ty = 1\n",
+    "resposta": {
+      "avisos": [],
+      "caracteres": 13,
+      "erros": [
+        {
+          "coluna": 1,
+          "lexema": "\t",
+          "linha": 2,
+          "mensagem": "Tabulação na indentação. Use espaços (4 por nível) para que a indentação seja a mesma em qualquer editor.",
+          "tipo": "ERRO_LEXICO"
+        }
+      ],
+      "linhas": 2,
+      "mensagem": "Análise léxica concluída com 1 erro léxico.",
+      "recebido": true,
+      "resumo": {
+        "erros_omitidos": 0,
+        "por_tipo": {
+          "DEDENT": 1,
+          "DELIMITADOR": 1,
+          "FIM_DE_ARQUIVO": 1,
+          "IDENTIFICADOR": 2,
+          "INDENT": 1,
+          "LITERAL_INTEIRO": 1,
+          "NEWLINE": 2,
+          "OPERADOR_ATRIBUICAO": 1,
+          "PALAVRA_RESERVADA": 1
+        },
+        "total_erros": 1,
+        "total_tokens": 11
+      },
+      "sucesso": false,
+      "tokens": [
+        {
+          "coluna": 1,
+          "lexema": "if",
+          "linha": 1,
+          "tipo": "PALAVRA_RESERVADA"
+        },
+        {
+          "coluna": 4,
+          "lexema": "x",
+          "linha": 1,
+          "tipo": "IDENTIFICADOR"
+        },
+        {
+          "coluna": 5,
+          "lexema": ":",
+          "linha": 1,
+          "tipo": "DELIMITADOR"
+        },
+        {
+          "coluna": 6,
+          "lexema": "\n",
+          "linha": 1,
+          "tipo": "NEWLINE"
+        },
+        {
+          "coluna": 1,
+          "lexema": "\t",
+          "linha": 2,
+          "tipo": "INDENT"
+        },
+        {
+          "coluna": 2,
+          "lexema": "y",
+          "linha": 2,
+          "tipo": "IDENTIFICADOR"
+        },
+        {
+          "coluna": 4,
+          "lexema": "=",
+          "linha": 2,
+          "tipo": "OPERADOR_ATRIBUICAO"
+        },
+        {
+          "coluna": 6,
+          "lexema": "1",
+          "linha": 2,
+          "tipo": "LITERAL_INTEIRO"
+        },
+        {
+          "coluna": 7,
+          "lexema": "\n",
+          "linha": 2,
+          "tipo": "NEWLINE"
+        },
+        {
+          "coluna": 1,
+          "lexema": "",
+          "linha": 3,
+          "tipo": "DEDENT"
+        },
+        {
+          "coluna": 1,
+          "lexema": "",
+          "linha": 3,
+          "tipo": "FIM_DE_ARQUIVO"
+        }
+      ]
+    }
+  },
+  "valido": {
+    "codigo": "x = 10\nwhile x > 0:\n    x = x - 1\n",
+    "resposta": {
+      "avisos": [],
+      "caracteres": 34,
+      "erros": [],
+      "linhas": 3,
+      "mensagem": "Análise léxica concluída sem erros.",
+      "recebido": true,
+      "resumo": {
+        "erros_omitidos": 0,
+        "por_tipo": {
+          "DEDENT": 1,
+          "DELIMITADOR": 1,
+          "FIM_DE_ARQUIVO": 1,
+          "IDENTIFICADOR": 4,
+          "INDENT": 1,
+          "LITERAL_INTEIRO": 3,
+          "NEWLINE": 3,
+          "OPERADOR_ARITMETICO": 1,
+          "OPERADOR_ATRIBUICAO": 2,
+          "OPERADOR_RELACIONAL": 1,
+          "PALAVRA_RESERVADA": 1
+        },
+        "total_erros": 0,
+        "total_tokens": 19
+      },
+      "sucesso": true,
+      "tokens": [
+        {
+          "coluna": 1,
+          "lexema": "x",
+          "linha": 1,
+          "tipo": "IDENTIFICADOR"
+        },
+        {
+          "coluna": 3,
+          "lexema": "=",
+          "linha": 1,
+          "tipo": "OPERADOR_ATRIBUICAO"
+        },
+        {
+          "coluna": 5,
+          "lexema": "10",
+          "linha": 1,
+          "tipo": "LITERAL_INTEIRO"
+        },
+        {
+          "coluna": 7,
+          "lexema": "\n",
+          "linha": 1,
+          "tipo": "NEWLINE"
+        },
+        {
+          "coluna": 1,
+          "lexema": "while",
+          "linha": 2,
+          "tipo": "PALAVRA_RESERVADA"
+        },
+        {
+          "coluna": 7,
+          "lexema": "x",
+          "linha": 2,
+          "tipo": "IDENTIFICADOR"
+        },
+        {
+          "coluna": 9,
+          "lexema": ">",
+          "linha": 2,
+          "tipo": "OPERADOR_RELACIONAL"
+        },
+        {
+          "coluna": 11,
+          "lexema": "0",
+          "linha": 2,
+          "tipo": "LITERAL_INTEIRO"
+        },
+        {
+          "coluna": 12,
+          "lexema": ":",
+          "linha": 2,
+          "tipo": "DELIMITADOR"
+        },
+        {
+          "coluna": 13,
+          "lexema": "\n",
+          "linha": 2,
+          "tipo": "NEWLINE"
+        },
+        {
+          "coluna": 1,
+          "lexema": "    ",
+          "linha": 3,
+          "tipo": "INDENT"
+        },
+        {
+          "coluna": 5,
+          "lexema": "x",
+          "linha": 3,
+          "tipo": "IDENTIFICADOR"
+        },
+        {
+          "coluna": 7,
+          "lexema": "=",
+          "linha": 3,
+          "tipo": "OPERADOR_ATRIBUICAO"
+        },
+        {
+          "coluna": 9,
+          "lexema": "x",
+          "linha": 3,
+          "tipo": "IDENTIFICADOR"
+        },
+        {
+          "coluna": 11,
+          "lexema": "-",
+          "linha": 3,
+          "tipo": "OPERADOR_ARITMETICO"
+        },
+        {
+          "coluna": 13,
+          "lexema": "1",
+          "linha": 3,
+          "tipo": "LITERAL_INTEIRO"
+        },
+        {
+          "coluna": 14,
+          "lexema": "\n",
+          "linha": 3,
+          "tipo": "NEWLINE"
+        },
+        {
+          "coluna": 1,
+          "lexema": "",
+          "linha": 4,
+          "tipo": "DEDENT"
+        },
+        {
+          "coluna": 1,
+          "lexema": "",
+          "linha": 4,
+          "tipo": "FIM_DE_ARQUIVO"
+        }
+      ]
+    }
+  }
+}

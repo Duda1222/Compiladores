@@ -3,6 +3,11 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { JSDOM } from "jsdom";
 
+// Respostas reais do backend (geradas por backend/tests/gerar_fixtures.py).
+export const FIXTURES = JSON.parse(
+  readFileSync(path.join(path.dirname(fileURLToPath(import.meta.url)), "fixtures", "respostas.json"), "utf8")
+);
+
 const raiz = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const html = readFileSync(path.join(raiz, "index.html"), "utf8");
 

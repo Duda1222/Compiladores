@@ -3,10 +3,9 @@
 import { EXEMPLOS, buscarExemplo } from "./exemplos.js";
 import { validarEntrada } from "./validacao.js";
 import { enviarCodigo } from "./api.js";
+import { renderizarLexico } from "./resultado.js";
 
 const MSG_PLACEHOLDER = "Os resultados da análise aparecerão aqui.";
-const MSG_NOTA_ETAPA =
-  "Nesta etapa a aplicação apenas recebe o código. As análises léxica, sintática e semântica serão implementadas nas próximas etapas.";
 
 /**
  * Inicializa a tela. Recebe o documento e, opcionalmente, opções de envio
@@ -30,7 +29,13 @@ export function iniciar(doc = document, opcoes = {}) {
     el.exemplos.appendChild(op);
   }
 
+  // Controle do passo a passo da análise exibida (para parar a reprodução
+  // automática quando a tela é substituída por outro resultado).
+  let controlePasso = null;
+
   function mostrar(tipo, titulo, linhas = []) {
+    controlePasso?.parar();
+    controlePasso = null;
     el.resultado.className = `resultado resultado--${tipo}`;
     el.resultado.replaceChildren();
     const h = doc.createElement("p");
@@ -45,6 +50,8 @@ export function iniciar(doc = document, opcoes = {}) {
   }
 
   function mostrarPlaceholder() {
+    controlePasso?.parar();
+    controlePasso = null;
     el.resultado.className = "resultado resultado--vazio";
     el.resultado.replaceChildren();
     const p = doc.createElement("p");
@@ -86,11 +93,8 @@ export function iniciar(doc = document, opcoes = {}) {
     try {
       const r = await enviarCodigo(codigo, opcoes);
       if (r.tipo === "sucesso") {
-        mostrar("sucesso", r.dados.mensagem ?? "Código recebido com sucesso.", [
-          `Linhas: ${r.dados.linhas}`,
-          `Caracteres: ${r.dados.caracteres}`,
-          MSG_NOTA_ETAPA,
-        ]);
+        controlePasso?.parar();
+        controlePasso = renderizarLexico(doc, el.resultado, r.dados, codigo, opcoes);
       } else if (r.tipo === "entrada") {
         mostrar("erro-entrada", "Entrada inválida", [r.mensagem]);
       } else if (r.tipo === "comunicacao") {

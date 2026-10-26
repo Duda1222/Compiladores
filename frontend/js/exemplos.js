@@ -30,8 +30,38 @@ export const EXEMPLOS = [
     id: "erro-intencional",
     titulo: "5. Com erro intencional",
     demonstra:
-      "Expressão incompleta e parêntese sem fechar, para as etapas de análise futuras.",
+      "Tokens válidos, mas estrutura incorreta (expressão incompleta, parêntese sem fechar). O scanner tokeniza normalmente; o erro será apontado pelo parser na Etapa 4.",
     codigo: "x = 10 +\ny = (3 * 4\n",
+  },
+  {
+    id: "operadores",
+    titulo: "6. Todos os operadores",
+    demonstra:
+      "Operadores aritméticos, de atribuição e os seis relacionais (note que == e != têm dois caracteres).",
+    codigo:
+      "a = 1\nb = 2.5\nc = a + b - 1 * 2 / 4\nok = a == b\nok = a != b\nok = a < b\nok = a <= b\nok = a > b\nok = a >= b\n",
+  },
+  {
+    id: "comentarios",
+    titulo: "7. Comentários e linhas em branco",
+    demonstra: "Comentários com # e linhas vazias são ignorados e não geram tokens.",
+    codigo: "# calcula o dobro\nx = 4   # valor inicial\n\n\ndobro = x * 2\n",
+  },
+  {
+    id: "blocos",
+    titulo: "8. Blocos aninhados (INDENT/DEDENT)",
+    demonstra:
+      "while com if/else dentro: a indentação gera INDENT ao abrir e DEDENT ao fechar cada bloco.",
+    codigo:
+      "x = 6\nwhile x > 0:\n    if x > 3:\n        x = x - 2\n    else:\n        x = x - 1\n",
+  },
+  {
+    id: "erros-lexicos",
+    titulo: "9. Com erros léxicos",
+    demonstra:
+      "Caractere inválido (@), número malformado (3.14.15 e 12abc), string (ainda fora do subconjunto) e palavra reservada fora do subconjunto (def).",
+    codigo:
+      "preco = 10 @ 2\nvalor = 3.14.15\nnome = \"Ana\"\ny = 12abc\ndef f\n",
   },
 ];
 

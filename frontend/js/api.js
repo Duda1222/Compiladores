@@ -2,7 +2,13 @@
 //
 // Contrato:
 //   requisição : { "codigo": "<texto>" }
-//   sucesso    : 200 { "recebido": true, "mensagem": "...", "linhas": n, "caracteres": n }
+//   sucesso    : 200 { "recebido": true, "sucesso": bool, "mensagem": "...",
+//                      "linhas": n, "caracteres": n,
+//                      "tokens": [{tipo, lexema, linha, coluna}],
+//                      "erros":  [{tipo, lexema, linha, coluna, mensagem}],
+//                      "avisos": [...], "resumo": {...} }
+//                (um programa com erros léxicos também volta com HTTP 200 e
+//                 "sucesso": false; o pedido foi processado)
 //   erro       : 4xx { "recebido": false, "erro": "<codigo>", "mensagem": "..." }
 
 export const MSG_COMUNICACAO =

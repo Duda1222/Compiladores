@@ -7,6 +7,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { iniciar } from "../js/app.js";
 import { enviarCodigo, MSG_COMUNICACAO } from "../js/api.js";
+import { EXEMPLOS } from "../js/exemplos.js";
 import { criarDom, textoDe } from "./ajudantes.js";
 
 const base = process.env.BACKEND_URL;
@@ -41,11 +42,33 @@ test("integração: interface completa contra o backend real", opcoes, async () 
   doc.getElementById("codigo").value = "a = 1\nb = 2\n";
   await ui.aoAnalisar();
   const t = textoDe(doc.getElementById("resultado-conteudo"));
-  assert.match(t, /Código recebido com sucesso\./);
-  assert.match(t, /Linhas: 2/);
+  assert.match(t, /Análise léxica concluída sem erros\./);
+  assert.match(t, /2 linhas/);
+  assert.ok(doc.querySelectorAll("#sec-tabela tbody tr").length >= 6);
 });
 
 test("integração: servidor fora do ar vira falha de comunicação", opcoes, async () => {
   const r = await enviarCodigo("x = 1", { url: "http://127.0.0.1:1/api/analisar", timeoutMs: 2000 });
   assert.deepEqual(r, { tipo: "comunicacao", mensagem: MSG_COMUNICACAO });
+});
+
+test("integração: todos os exemplos da tela são tokenizados pelo backend real", opcoes, async () => {
+  for (const ex of EXEMPLOS) {
+    const r = await enviarCodigo(ex.codigo, { url: `${base}/api/analisar` });
+    assert.equal(r.tipo, "sucesso", ex.id);
+    assert.ok(Array.isArray(r.dados.tokens) && r.dados.tokens.length > 0, ex.id);
+    // só o exemplo de erros léxicos deve falhar na análise léxica
+    assert.equal(r.dados.sucesso, ex.id !== "erros-lexicos", ex.id);
+  }
+});
+
+test("integração: erro léxico aparece na interface com linha e coluna", opcoes, async () => {
+  const dom = criarDom();
+  const doc = dom.window.document;
+  const ui = iniciar(doc, { url: `${base}/api/analisar` });
+  doc.getElementById("codigo").value = "x = 10 @ 2\n";
+  await ui.aoAnalisar();
+  const t = textoDe(doc.getElementById("sec-erros"));
+  assert.match(t, /Linha 1, coluna 8/);
+  assert.match(t, /Caractere não reconhecido: '@'/);
 });
