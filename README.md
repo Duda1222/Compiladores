@@ -48,6 +48,21 @@ A tabela completa (regras, mensagens de erro, o que **não** é reconhecido) est
 
 Ficam para etapas posteriores: funções, listas, strings, classes e demais construções. Strings, por exemplo, geram erro léxico específico.
 
+## Diferencial em relação aos trabalhos estudados
+
+A comparação completa (11 ferramentas, 14 critérios, com a página ou seção de cada evidência) está no documento da Etapa 3. O que se pode afirmar **a partir daquela matriz** é:
+
+| O que este software tem (Etapa 3) | Situação nos trabalhos estudados |
+| --- | --- |
+| Interface web, entrada de código, exemplos, análise léxica, passo a passo, diagnóstico de erros e explicações | Graciano Junior et al. (2022) também reúne web, passo a passo, léxica/sintática e explicação teórica, mas sobre uma pseudolinguagem. **Não se reivindica originalidade nessa combinação.** |
+| Linguagem **Python** (subconjunto) | Nas fontes lidas, nenhuma analisa Python |
+| Tokens **`INDENT` e `DEDENT`** gerados por pilha de níveis e mostrados passo a passo | Nas fontes lidas, nenhuma trata desses tokens |
+| Scanner **verificado automaticamente contra o `tokenize`** do Python (tipo, lexema, linha e coluna de cada token, em 300 programas gerados aleatoriamente e em programas fixos) | Não aparece nas fontes lidas |
+| Erros léxicos em português, com linha, coluna e motivo, que não interrompem a análise | Há retorno de erros em outras ferramentas; aqui é em texto didático, e não só cor |
+| Documentação do escopo léxico, tutorial inicial e registro de testes no repositório | **Não foi comparado** na matriz, então não se afirma diferença |
+
+**Importante:** "não aparece nas fontes lidas" não prova que não exista. A matriz usa só as informações dos artigos. Também **não há**, neste software, análise sintática, semântica, geração de código, avaliação com estudantes nem medida de aprendizagem (a sintática é a Etapa 4). Não se afirma que o software seja superior aos existentes.
+
 ## Tecnologias
 
 - **Frontend:** HTML, CSS e JavaScript puro (módulos ES), servido pelo **Nginx**. Não há framework nem etapa de build.
@@ -294,7 +309,7 @@ docker compose up --build -d
 
 **Resultados relevantes** (detalhes, falhas corrigidas e pendências em [`docs/testes.md`](docs/testes.md)):
 
-- backend: **188** testes aprovados, 0 reprovados (125 do scanner, 40 de endpoints, 22 de validação, 1 de fixtures);
+- backend: **231** testes aprovados, 0 reprovados (126 do scanner, 42 de verificação cruzada com o `tokenize` do Python, 40 de endpoints, 22 de validação, 1 de fixtures);
 - frontend: **124** aprovados, 0 reprovados (7 de integração ignorados sem `BACKEND_URL`);
 - integração frontend ↔ backend real: **131** aprovados, 0 reprovados;
 - regressão das Etapas 1 e 2: todos os testes anteriores continuam passando (um teste foi atualizado porque a mensagem de sucesso mudou de propósito);

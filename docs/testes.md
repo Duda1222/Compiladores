@@ -18,11 +18,12 @@ Registro do que foi testado na Etapa 3. Os testes das Etapas 1 e 2 foram **manti
 
 | Funcionalidade / módulo | Tipo | Arquivo | Aprovados | Reprovados |
 | --- | --- | --- | --- | --- |
-| **Scanner**: palavras reservadas, identificadores, literais (válidos e malformados), operadores, delimitadores, comentários, espaços, posição, erros, INDENT/DEDENT, bordas, aleatório | Unitário | `test_scanner.py` | 125 | 0 |
+| **Scanner**: palavras reservadas, identificadores, literais (válidos e malformados), operadores, delimitadores, comentários, espaços, posição, erros, INDENT/DEDENT, bordas, aleatório | Unitário | `test_scanner.py` | 126 | 0 |
 | Endpoint `/api/analisar` com tokens/erros (contrato da Etapa 3) + regressão das Etapas 1 e 2 | Endpoints / regressão | `test_api.py` | 40 | 0 |
 | Regras de validação | Unitário / regressão | `test_validacao.py` | 22 | 0 |
 | Fixtures do frontend iguais à resposta real do backend | Contrato | `test_fixtures.py` | 1 | 0 |
-| **Total backend** | | `python -m pytest -q` | **188** | **0** |
+| **Verificação cruzada** do scanner contra o módulo `tokenize` da biblioteca padrão do Python (tipo, lexema, linha e coluna): 20 programas fixos, 300 programas aleatórios do subconjunto | Referência | `test_scanner_vs_tokenize.py` | 42 | 0 |
+| **Total backend** | | `python -m pytest -q` | **231** | **0** |
 | Catálogo de tokens, explicações, segmentação do realce | Unitário | `tokens.test.js` | 22 | 0 |
 | Tabela, código colorido, erros, passo a passo, segurança (XSS), responsividade | Interface (jsdom) | `lexico-ui.test.js` | 33 | 0 |
 | Tela, exemplos, edição, envio, mensagens de erro (Etapa 2, adaptado) | Interface / regressão | `ui.test.js` | 35 | 0 |
@@ -34,6 +35,7 @@ Registro do que foi testado na Etapa 3. Os testes das Etapas 1 e 2 foram **manti
 ### O que os testes cobrem (checklist do enunciado, seção 6)
 
 - **6.1 Scanner:** cada palavra reservada, identificadores válidos e inválidos, inteiros, decimais e literais malformados (`007`, `3.`, `.5`, `1.2.3`, `12abc`, `1e5`), todos os operadores (inclusive `==`, `!=`, `<=`, `>=`), delimitadores, comentários, espaços e quebras (`\n`, `\r\n`, `\r`), linha/coluna em várias linhas, caracteres inválidos com localização, strings, tabulação e indentação inconsistente, e bordas: código vazio, só espaços, só comentários, token no fim do arquivo sem quebra de linha. Há ainda um teste com 600 entradas aleatórias (semente fixa) que exige: nunca lançar exceção, `FIM_DE_ARQUIVO` sempre por último e todo lexema estar exatamente na linha/coluna informada.
+- **Referência externa:** a sequência de tokens do scanner é comparada, token a token, com a do `tokenize` do Python em programas do subconjunto. Isso não prova correção para entradas fora do subconjunto, onde o scanner é propositalmente mais restrito.
 - **6.2 Endpoints:** requisição válida → `sucesso: true` e tokens; erro léxico → HTTP 200 com `sucesso: false` e `erros`; entrada vazia como na Etapa 2 (422); formato de cada token/erro; limite de 200 erros; falha inesperada no scanner → 500 genérico sem detalhes internos.
 - **6.3 Interface:** tokens na tabela, erros com linha e coluna, trechos com erro marcados no código, interface estável com entradas inválidas (HTML/script no código nunca é inserido como HTML), passo a passo (Próximo, Anterior, Reproduzir, Pausar, Mostrar tudo), contagem por categoria, funcionalidades da Etapa 2 preservadas.
 - **6.4 Regressão:** todos os testes das Etapas 1 e 2 executados (backend e frontend), integração com o backend real e smoke test.
@@ -48,6 +50,7 @@ Registro do que foi testado na Etapa 3. Os testes das Etapas 1 e 2 foram **manti
 | Depois de um erro de indentação, linhas seguintes com o mesmo recuo repetiam o erro | O novo nível é registrado na pilha para recuperação |
 | Uma string como `"Ana"` gerava dois erros (as duas aspas) e `Ana` virava identificador | A string inteira passa a ser **um único** erro; string sem fechar vai até o fim da linha |
 | Dois testes de interface comparavam texto sem contar os `\n` reais; um terceiro concatenava `IDENTIFICADOR` e `×4` sem espaço | Testes corrigidos (o código do produto estava certo) |
+| Na verificação cruzada com o `tokenize`, `FIM_DE_ARQUIVO` e `DEDENT` ficavam na mesma linha do último token quando o arquivo não terminava em quebra de linha; o Python os coloca na linha seguinte | Scanner alinhado à convenção do Python; teste dedicado |
 | O realce duplicaria o texto quando um erro de tabulação coincidia com o token `INDENT` | `montarSegmentos` trata sobreposição; teste dedicado |
 
 ## Execução com Docker real

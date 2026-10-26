@@ -547,3 +547,12 @@ def test_nunca_levanta_excecao_com_entradas_aleatorias():
         for e in r.erros:
             assert e.mensagem
             assert 1 <= e.linha <= len(linhas)
+
+
+def test_fim_de_arquivo_sem_quebra_final_fica_na_linha_seguinte():
+    # mesma convenção do tokenize do Python (ver test_scanner_vs_tokenize.py)
+    r = analisar_lexico("if x:\n    y = 1")
+    ultimos = [(t.tipo, t.linha, t.coluna) for t in r.tokens[-3:]]
+    assert ultimos == [(NEWLINE, 2, 10), (DEDENT, 3, 1), (FIM_DE_ARQUIVO, 3, 1)]
+    r2 = analisar_lexico("x = 1\n")
+    assert (r2.tokens[-1].linha, r2.tokens[-1].coluna) == (2, 1)

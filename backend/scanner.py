@@ -489,14 +489,18 @@ class Scanner:
                 self._avancar()
 
     def _finalizar(self) -> None:
+        # Convenção do tokenizador do Python: se o arquivo não termina em
+        # quebra de linha, os DEDENT e o FIM ficam no início da linha seguinte.
+        sem_quebra_final = self.n > 0 and not self.texto.endswith("\n")
+        linha_fim, coluna_fim = (self.linha + 1, 1) if sem_quebra_final else (self.linha, self.coluna)
         # Última linha sem quebra de linha: NEWLINE "implícito".
         if self.linha_tem_token:
             self._emitir(NEWLINE, "", self.linha, self.coluna)
             self.linha_tem_token = False
         while len(self.pilha_indent) > 1:
             self.pilha_indent.pop()
-            self._emitir(DEDENT, "", self.linha, self.coluna)
-        self._emitir(FIM_DE_ARQUIVO, "", self.linha, self.coluna)
+            self._emitir(DEDENT, "", linha_fim, coluna_fim)
+        self._emitir(FIM_DE_ARQUIVO, "", linha_fim, coluna_fim)
 
 
 def analisar_lexico(codigo: str) -> ResultadoLexico:
