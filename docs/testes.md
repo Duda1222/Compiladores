@@ -50,18 +50,17 @@ Registro do que foi testado na Etapa 3. Os testes das Etapas 1 e 2 foram **manti
 | Dois testes de interface comparavam texto sem contar os `\n` reais; um terceiro concatenava `IDENTIFICADOR` e `×4` sem espaço | Testes corrigidos (o código do produto estava certo) |
 | O realce duplicaria o texto quando um erro de tabulação coincidia com o token `INDENT` | `montarSegmentos` trata sobreposição; teste dedicado |
 
-## Observação importante sobre o Docker
+## Execução com Docker real
 
-O `smoke_test.sh` passou (24/24) contra uma **emulação** do Nginx (servidor Python que serve o frontend e repassa `/api/*` ao backend em Gunicorn), porque o ambiente de desenvolvimento não tinha daemon Docker em funcionamento. Portanto:
-
-- a alteração feita nos arquivos do Docker foi mínima: o `backend/Dockerfile` agora copia também `scanner.py`. O `docker-compose.yml`, o `nginx.conf` e o Dockerfile do frontend não mudaram (o frontend copia a pasta `js/` inteira, que inclui os módulos novos);
-- **`docker compose up --build` ainda não foi executado neste registro.** Antes da entrega é necessário rodar `docker compose up --build -d` e depois `./scripts/smoke_test.sh` numa máquina com Docker, e anotar o resultado abaixo.
+Executado pela autora em Linux (WSL), com Docker 29.9.2 e Docker Compose v5.6.1, a partir de um clone limpo do repositório:
 
 | Verificação em Docker real | Resultado |
 | --- | --- |
-| `docker compose up --build -d` | _pendente_ |
-| `./scripts/smoke_test.sh` | _pendente_ |
-| Fluxo manual em `http://localhost:8080`: escolher exemplo, editar, analisar, ver tokens e erros | _pendente_ |
+| `docker compose up --build -d` | aprovado: os dois contêineres subiram e a aplicação respondeu em `http://localhost:8080` |
+| `./scripts/smoke_test.sh` | **aprovado: 24 aprovados, 0 reprovados** |
+| Fluxo manual em `http://localhost:8080`: escolher o exemplo 9, analisar, ver erros léxicos, código colorido, tokens e passo a passo | aprovado (capturas de tela da execução) |
+
+Na fase de desenvolvimento, o mesmo smoke test já havia passado (24/24) contra uma emulação do Nginx, pois o ambiente de desenvolvimento não conseguia baixar as imagens do Docker Hub. A alteração feita nos arquivos do Docker foi mínima: o `backend/Dockerfile` agora copia também `scanner.py`. O `docker-compose.yml`, o `nginx.conf` e o Dockerfile do frontend não mudaram.
 
 ## Verificação manual da interface
 

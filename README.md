@@ -298,7 +298,7 @@ docker compose up --build -d
 - frontend: **124** aprovados, 0 reprovados (7 de integração ignorados sem `BACKEND_URL`);
 - integração frontend ↔ backend real: **131** aprovados, 0 reprovados;
 - regressão das Etapas 1 e 2: todos os testes anteriores continuam passando (um teste foi atualizado porque a mensagem de sucesso mudou de propósito);
-- smoke test: **24** verificações aprovadas contra uma emulação do Nginx; a execução com o Docker Compose real está registrada como **pendente** em `docs/testes.md`.
+- smoke test: **24** verificações aprovadas, 0 reprovadas, **executadas com o Docker Compose real** (Linux/WSL, Docker 29.9.2); detalhes em `docs/testes.md`.
 
 ## Solução de problemas
 
