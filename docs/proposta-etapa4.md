@@ -27,6 +27,8 @@ Ver [`README.md`](../README.md) (seção "Contrato da análise sintática") e [`
 
 - Casos de teste: [`casos-de-teste.md`](casos-de-teste.md).
 - Testes automatizados: `cd backend && python -m pytest`; `cd frontend && npm test`; `docker compose up --build -d && ./scripts/smoke_test.sh`.
+- Última execução (18/11/2026, clone limpo): backend 668 aprovados e 2 ignorados; frontend 181 aprovados com o backend real; smoke test 33 de 33. Ressalva em [`testes.md`](testes.md): o `docker compose up --build` ainda precisa ser rodado numa máquina com acesso ao Docker Hub.
+- Questionário da avaliação por pares, pronto para copiar: [`questionario-avaliacao.md`](questionario-avaliacao.md).
 - Avaliação por pares: questionário Likert (1 a 5) aplicado a estudantes que cursam ou já cursaram Compiladores, anônimo e voluntário. Mede **percepção** de clareza e utilidade, não aprendizagem.
 
 ## Diferencial pretendido (sem afirmar ineditismo)

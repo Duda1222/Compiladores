@@ -32,7 +32,8 @@ Executada em **cópia limpa** do repositório (sem `node_modules`, `.venv`, `__p
 | Regressão: endpoint da Etapa 3 (contrato plano) | `test_api.py` | 40 | 0 |
 | Regressão: validação de entrada | `test_validacao.py` | 22 | 0 |
 | Fixtures do frontend = resposta real do backend | `test_fixtures.py` | 1 | 0 |
-| **Total backend** | `python -m pytest -q` | **650** | **0** |
+| **Casos de teste documentados** (CT-01 a CT-18; CT-S01 e CT-S02 ignorados até a Etapa 5) | `test_casos_etapa4.py` | 18 (2 ignorados) | 0 |
+| **Total backend** | `python -m pytest -q` | **668** (2 ignorados) | **0** |
 | Funções puras da tela sintática (rótulos, texto indentado, posição, realce, JSON) | `sintatico.test.js` | 9 | 0 |
 | Interface sintática (árvore, expandir/recolher, realce, filtro, exportar JSON, erros, parser não executado, programa vazio, HTML hostil, consistência tokens × derivação) | `sintatico-ui.test.js` | 22 | 0 |
 | Regressão do frontend (Etapas 2 e 3) | demais arquivos | 130 (7 ignorados) | 0 |
@@ -43,7 +44,7 @@ Os testes `tokens`, `ui` e `exemplos` das Etapas 2 e 3 têm casos gerados a part
 
 ### Verificações extras
 
-- **Smoke test (parte da API):** as verificações do `scripts/smoke_test.sh` foram executadas contra o backend em Gunicorn, sem o Nginx: **22 aprovadas, 0 reprovadas** (14 antigas + 8 novas). **O smoke test completo não foi executado nesta etapa**, porque ele precisa do Docker Compose (ver pendências).
+- **Smoke test completo:** executado em 18/11/2026 contra a aplicação de pé em `http://localhost:8080`, a partir de um **clone limpo** do repositório no GitHub: **33 aprovadas, 0 reprovadas** (inclui a página inicial, os arquivos estáticos `css/` e `js/`, `/api/health`, `/api/hello`, o scanner, o parser e as entradas inválidas). **Ressalva honesta:** o ambiente usado não tem acesso ao Docker Hub (o `docker build` falha ao baixar `nginx:1.27-alpine` e `python:3.12-slim`), então a aplicação foi servida por Gunicorn na porta 5000 e por um servidor estático na 8080 que reproduz o `frontend/nginx.conf` (arquivos estáticos + encaminhamento de `/api/`). O que **falta validar** é só a construção das imagens e o Nginx em si: rode `docker compose up --build -d && ./scripts/smoke_test.sh` numa máquina com Docker Hub liberado.
 - **Interface em navegador real:** conferida em Chromium (Playwright) contra o backend real: exemplos 9, 10 e 11 e o 8 em largura de celular (390 px). Sem erros no console e sem rolagem horizontal. Capturas em `docs/img/`.
 
 ## O que os testes cobrem (checklist do enunciado, seção 7)

@@ -19,7 +19,7 @@ Oferecer uma "porta de entrada" para o compilador educacional: o estudante escre
 
 Fluxo: ![Fluxo do compilador](docs/img/fluxo-compilador.png)
 
-Para quem está começando, veja o [tutorial](docs/tutorial.md). Documentação da Etapa 4: [gramática](docs/gramatica.md) · [AST](docs/ast.md) · [estratégia do parser, erros e decisões](docs/sintatico.md) · [registro de testes](docs/testes.md) · [casos de teste](docs/casos-de-teste.md) · [proposta, fluxograma e plano de avaliação](docs/proposta-etapa4.md).
+Para quem está começando, veja o [tutorial](docs/tutorial.md). Documentação da Etapa 4: [gramática](docs/gramatica.md) · [AST](docs/ast.md) · [estratégia do parser, erros e decisões](docs/sintatico.md) · [registro de testes](docs/testes.md) · [casos de teste](docs/casos-de-teste.md) · [proposta, fluxograma e plano de avaliação](docs/proposta-etapa4.md) · [questionário de avaliação](docs/questionario-avaliacao.md).
 
 ## Linguagem escolhida e subconjunto
 
@@ -400,12 +400,12 @@ docker compose up --build -d
 
 **Resultados relevantes** (detalhes, falhas corrigidas e pendências em [`docs/testes.md`](docs/testes.md); executados em cópia limpa do repositório):
 
-- backend: **650** testes aprovados, 0 reprovados (398 do parser/AST, 21 do endpoint com análise sintática, 126 do scanner, 42 de verificação cruzada com o `tokenize`, 40 do endpoint da Etapa 3, 22 de validação, 1 de fixtures);
+- backend: **668** testes aprovados, 0 reprovados, 2 ignorados (398 do parser/AST, 21 do endpoint com análise sintática, 126 do scanner, 42 de verificação cruzada com o `tokenize`, 40 do endpoint da Etapa 3, 22 de validação, 1 de fixtures, 18 dos casos de teste documentados em [`docs/casos-de-teste.md`](docs/casos-de-teste.md); os 2 ignorados são casos semânticos da Etapa 5);
 - a AST foi comparada com a do módulo `ast` do Python: estrutura em **200** programas aleatórios e posições (início e fim de cada nó) em **100**;
 - frontend: **161** aprovados, 0 reprovados (20 de integração ignorados sem `BACKEND_URL`);
 - integração frontend ↔ backend real: **181** aprovados, 0 reprovados;
 - regressão das Etapas 1 a 3: todos os testes anteriores continuam passando, **sem alterá-los**;
-- smoke test: as **22** verificações da parte de API passaram contra o backend (sem Nginx). **O smoke test completo e o `docker compose up --build` desta etapa não foram executados**, porque o ambiente de desenvolvimento não tinha Docker. Rode `docker compose up --build -d && ./scripts/smoke_test.sh` num clone limpo para validar (na Etapa 3 isso foi feito com Docker real: 24/24).
+- smoke test: **33 de 33** verificações aprovadas, em clone limpo deste repositório, com a aplicação de pé em `http://localhost:8080` (página inicial, arquivos estáticos, `/api/health`, `/api/hello`, scanner, parser e entradas inválidas). **Ressalva:** o ambiente de desenvolvimento não tem acesso ao Docker Hub, então o frontend foi servido por um equivalente ao `frontend/nginx.conf` em vez do contêiner Nginx; o `docker compose up --build` continua pendente de uma execução em máquina com Docker Hub liberado (na Etapa 3 isso foi feito com Docker real: 24/24).
 
 ## Solução de problemas
 
