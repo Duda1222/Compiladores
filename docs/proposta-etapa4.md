@@ -12,7 +12,7 @@ Fonte do diagrama: [`arquitetura.mmd`](arquitetura.mmd). O navegador fala só co
 
 ![Fluxograma do sistema](img/fluxo-sistema.png)
 
-Fonte: [`fluxo-sistema.mmd`](fluxo-sistema.mmd). Verde: implementado. Cinza tracejado: pendente (análise semântica, Etapa 5).
+Fonte: [`fluxo-sistema.py`](fluxo-sistema.py) (gera `img/fluxo-sistema.png`). Verde: implementado. Cinza tracejado: pendente (análise semântica, Etapa 5).
 
 - **Decisão 1 (erros léxicos):** se existirem, o parser **não** é executado; a resposta traz `sintatico.executado = false` e só os erros léxicos. Motivo: tokens inválidos gerariam erros sintáticos em cascata.
 - **Decisão 2 (erros sintáticos):** o parser devolve `sintatico.erros[]` (encontrado, esperado, regra, dica) e `ast = null`; sem erros, devolve AST e árvore de derivação.
