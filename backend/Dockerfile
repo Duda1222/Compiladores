@@ -8,7 +8,7 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY app.py validacao.py scanner.py ./
+COPY app.py validacao.py scanner.py arvore.py sintatico.py ./
 
 EXPOSE 5000
 
