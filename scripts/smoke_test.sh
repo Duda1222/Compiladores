@@ -51,6 +51,7 @@ verificar_status "js/app.js disponível" 200 "$BASE_URL/js/app.js"
 verificar_status "js/exemplos.js disponível" 200 "$BASE_URL/js/exemplos.js"
 verificar_status "js/tokens.js disponível" 200 "$BASE_URL/js/tokens.js"
 verificar_status "js/resultado.js disponível" 200 "$BASE_URL/js/resultado.js"
+verificar_status "js/sintatico.js disponível (Etapa 4)" 200 "$BASE_URL/js/sintatico.js"
 
 echo
 echo "Backend via proxy do Nginx (comunicação entre contêineres)"
@@ -69,6 +70,15 @@ verificar_status "scanner: código com erro léxico (HTTP 200)" 200 -X POST "${J
 verificar_corpo  "scanner: erro léxico reportado" '"tipo":"ERRO_LEXICO"' -X POST "${JSON[@]}" -d '{"codigo":"x = 10 @ 2"}' "$BASE_URL/api/analisar"
 verificar_corpo  "scanner: sucesso false com erro" '"sucesso":false' -X POST "${JSON[@]}" -d '{"codigo":"x = 10 @ 2"}' "$BASE_URL/api/analisar"
 verificar_corpo  "scanner: INDENT/DEDENT em blocos" '"tipo":"INDENT"' -X POST "${JSON[@]}" -d '{"codigo":"if x:\n    y = 1\n"}' "$BASE_URL/api/analisar"
+# Etapa 4: análise sintática e AST
+verificar_corpo  "parser: bloco lexico preservado" '"lexico":{' -X POST "${JSON[@]}" -d '{"codigo":"x = 10"}' "$BASE_URL/api/analisar"
+verificar_corpo  "parser: AST do programa" '"tipo":"Programa"' -X POST "${JSON[@]}" -d '{"codigo":"x = 10 + 5 * 2"}' "$BASE_URL/api/analisar"
+verificar_corpo  "parser: nó de atribuição" '"tipo":"Atribuicao"' -X POST "${JSON[@]}" -d '{"codigo":"x = 10"}' "$BASE_URL/api/analisar"
+verificar_corpo  "parser: nó de condicional" '"tipo":"Condicional"' -X POST "${JSON[@]}" -d '{"codigo":"if x:\n    y = 1\n"}' "$BASE_URL/api/analisar"
+verificar_status "parser: erro sintático (HTTP 200)" 200 -X POST "${JSON[@]}" -d '{"codigo":"x = 10 +"}' "$BASE_URL/api/analisar"
+verificar_corpo  "parser: erro sintático reportado" '"tipo":"ERRO_SINTATICO"' -X POST "${JSON[@]}" -d '{"codigo":"x = 10 +"}' "$BASE_URL/api/analisar"
+verificar_corpo  "parser: ast nula quando há erro" '"ast":null' -X POST "${JSON[@]}" -d '{"codigo":"x = = 3"}' "$BASE_URL/api/analisar"
+verificar_corpo  "parser: não executa com erro léxico" '"executado":false' -X POST "${JSON[@]}" -d '{"codigo":"x = 10 @ 2"}' "$BASE_URL/api/analisar"
 verificar_status "texto vazio" 422 -X POST "${JSON[@]}" -d '{"codigo":""}' "$BASE_URL/api/analisar"
 verificar_status "somente espaços" 422 -X POST "${JSON[@]}" -d '{"codigo":"   \n  "}' "$BASE_URL/api/analisar"
 verificar_status "campo ausente" 400 -X POST "${JSON[@]}" -d '{"outro":"x"}' "$BASE_URL/api/analisar"

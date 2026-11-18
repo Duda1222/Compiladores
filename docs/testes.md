@@ -1,4 +1,79 @@
-# Registro de testes: Etapa 3 (análise léxica)
+# Registro de testes
+
+Este arquivo guarda o registro de cada etapa. A Etapa 4 vem primeiro; o registro da Etapa 3 foi mantido abaixo, sem alterações de conteúdo.
+
+# Etapa 4 (análise sintática e AST)
+
+Os testes das Etapas 1 a 3 foram **mantidos e continuam rodando** (regressão). Nenhum teste antigo foi alterado para passar; as únicas mudanças em arquivos existentes de teste foram acrescentar dois casos (`sintatico_valido`, `sintatico_erro`) à geração de fixtures (`gerar_fixtures.py`).
+
+## Como executar
+
+| Camada | Comando | Pasta |
+| --- | --- | --- |
+| Backend completo (scanner + parser + endpoints) | `python -m pytest -q` | `backend/` |
+| Só o parser e a AST | `python -m pytest -q tests/test_sintatico.py` | `backend/` |
+| Só o endpoint com análise sintática | `python -m pytest -q tests/test_api_sintatico.py` | `backend/` |
+| Frontend (unitários e interface) | `npm test` | `frontend/` |
+| Frontend + backend real | `BACKEND_URL=http://localhost:5000 npm test` | `frontend/` com o backend em execução |
+| Tudo sem Docker | `./scripts/testar_tudo.sh` | raiz |
+| Implantação (inclui 8 verificações novas do parser) | `./scripts/smoke_test.sh` | raiz, com `docker compose up --build -d` |
+| Regenerar respostas de exemplo do frontend | `python tests/gerar_fixtures.py` | `backend/` |
+
+## Resultados da última execução
+
+Executada em **cópia limpa** do repositório (sem `node_modules`, `.venv`, `__pycache__`; ambiente virtual novo com `requirements-dev.txt` e `npm install`), via `./scripts/testar_tudo.sh`. Ambiente: Linux, Python 3.12, Node (o do ambiente de desenvolvimento).
+
+| Funcionalidade | Arquivo | Aprovados | Reprovados |
+| --- | --- | --- | --- |
+| **Parser e AST**: cada construção, precedência e associatividade, aninhamento, posições, casos limite, 12+ categorias de erro com linha/coluna/mensagem, recuperação sem cascata, árvore de derivação, comparação com o módulo `ast` do Python (300 programas) | `test_sintatico.py` | 398 | 0 |
+| **Endpoint** com `lexico` + `sintatico`: contrato, campos da Etapa 3 preservados, erro sintático (ast nula), erro léxico (parser não executa), programa vazio, regressão das Etapas 1 e 2, falha inesperada, entradas hostis | `test_api_sintatico.py` | 21 | 0 |
+| Regressão: scanner | `test_scanner.py` | 126 | 0 |
+| Regressão: verificação cruzada do scanner com `tokenize` | `test_scanner_vs_tokenize.py` | 42 | 0 |
+| Regressão: endpoint da Etapa 3 (contrato plano) | `test_api.py` | 40 | 0 |
+| Regressão: validação de entrada | `test_validacao.py` | 22 | 0 |
+| Fixtures do frontend = resposta real do backend | `test_fixtures.py` | 1 | 0 |
+| **Total backend** | `python -m pytest -q` | **650** | **0** |
+| Funções puras da tela sintática (rótulos, texto indentado, posição, realce, JSON) | `sintatico.test.js` | 9 | 0 |
+| Interface sintática (árvore, expandir/recolher, realce, filtro, exportar JSON, erros, parser não executado, programa vazio, HTML hostil, consistência tokens × derivação) | `sintatico-ui.test.js` | 22 | 0 |
+| Regressão do frontend (Etapas 2 e 3) | demais arquivos | 130 (7 ignorados) | 0 |
+| **Total frontend sem backend** | `npm test` | **161** (20 ignorados) | **0** |
+| Frontend ↔ backend **real** (inclui os 11 exemplos da tela) | `BACKEND_URL=... npm test` | **181** | **0** |
+
+Os testes `tokens`, `ui` e `exemplos` das Etapas 2 e 3 têm casos gerados a partir das fixtures e da lista de exemplos; por isso a contagem deles subiu (24, 37 e 14) sem que nenhum teste fosse editado.
+
+### Verificações extras
+
+- **Smoke test (parte da API):** as verificações do `scripts/smoke_test.sh` foram executadas contra o backend em Gunicorn, sem o Nginx: **22 aprovadas, 0 reprovadas** (14 antigas + 8 novas). **O smoke test completo não foi executado nesta etapa**, porque ele precisa do Docker Compose (ver pendências).
+- **Interface em navegador real:** conferida em Chromium (Playwright) contra o backend real: exemplos 9, 10 e 11 e o 8 em largura de celular (390 px). Sem erros no console e sem rolagem horizontal. Capturas em `docs/img/`.
+
+## O que os testes cobrem (checklist do enunciado, seção 7)
+
+- **Parser (7.1):** válidos por construção (atribuição, `if`, `if/else`, `while`, expressões, relacionais, unário); estrutura da AST; precedência e associatividade (`10 + 5 * 2`, `20 - 5 - 3`, `(10 + 5) * 2`); aninhamento e `else` pendente; construções incompletas; construções inválidas; posições; mensagens; casos limite (código vazio, só comentários, número com 6.000 dígitos, cadeias e aninhamento acima do limite); integração com o scanner (as folhas da árvore de derivação = tokens).
+- **Referência externa:** 200 programas aleatórios cuja AST é comparada, nó a nó, com a do `ast` do Python; 100 sem parênteses também com início e fim de cada nó.
+- **Backend (7.2):** código válido, erro sintático (`ast` nula), erro léxico (parser não roda, decisão documentada), entrada vazia como na Etapa 2 (422), contrato mantendo os campos da Etapa 3, códigos HTTP, regressão.
+- **Interface (7.3):** árvore exibida, erros com linha/coluna/esperado/encontrado, parser não executado, programa vazio, expandir/recolher, realce, filtro, JSON, acessibilidade (não depende de cor), HTML hostil não é interpretado.
+- **Consistência token × árvore (7.4):** folhas da derivação = tokens; nós da tela = `total_nos` da resposta.
+- **Regressão (7.5):** todos os testes das Etapas 1 a 3.
+
+## Falhas encontradas durante o desenvolvimento e correções
+
+| Falha | Correção |
+| --- | --- |
+| `test_fixtures` (Etapa 3) falhou depois de acrescentar `lexico` e `sintatico` à resposta | Esperado: o teste existe para avisar que as fixtures ficaram desatualizadas. As fixtures foram **regeneradas** com o scanner/parser reais (`gerar_fixtures.py`); o teste não foi alterado |
+| Erro de "parêntese não fechado" no fim do arquivo apontava para a linha 3, que não existe (o `NEWLINE` sintético do scanner fica na linha seguinte) | Para fim de arquivo, o erro aponta o fim do último token com conteúdo; teste dedicado |
+| `if = 3` dava a mensagem genérica "esperava identificador, número ou '('" | Mensagem específica de palavra reservada usada como variável; o teste (escrito primeiro) já cobrava isso |
+| Teste de interface comparava `Encontrado fim da linha` mas o `textContent` do DOM junta `<dt>` e `<dd>` sem espaço | Erro do teste (a tela estava certa): regex ajustada com `\s*` |
+| Primeira versão da tela deixava os rótulos da árvore quebrarem em várias linhas e o painel do nó longe do clique | Layout em coluna única, painel e código acima da árvore, rótulos sem quebra; refeitas as capturas |
+| Exemplo 11 prometia "parêntese sem fechar" e "else sem if", mas o parser (corretamente) descartava o `else` do `if` com erro | Exemplo reescrito para mostrar erros que de fato aparecem; a descrição agora corresponde à saída |
+
+## Pendências e limitações (o que **não** foi validado)
+
+- **Docker Compose real:** o ambiente em que esta etapa foi desenvolvida **não tem Docker**. Portanto **não foram executados** `docker compose up --build`, o smoke test completo (com Nginx) nem a verificação de que a imagem do backend contém os novos arquivos. O que foi feito: `backend/Dockerfile` passou a copiar `arvore.py` e `sintatico.py` (sem isso o contêiner falharia ao importar); `docker-compose.yml`, `nginx.conf` e o Dockerfile do frontend **não mudaram** (o Nginx já serve `js/` inteiro). Rodar `docker compose up --build -d && ./scripts/smoke_test.sh` num clone limpo é a validação que falta.
+- Não há teste automatizado em navegador real no repositório; a interface é testada em jsdom e verificada manualmente com Playwright (capturas).
+- Não há avaliação com estudantes.
+- Diferenciais **não** implementados: construção passo a passo da árvore e integração com Ollama/Llama 3.2 (ver `docs/sintatico.md`, seção 7).
+
+## Histórico: registro da Etapa 3 (análise léxica)
 
 Registro do que foi testado na Etapa 3. Os testes das Etapas 1 e 2 foram **mantidos** e continuam rodando (regressão).
 

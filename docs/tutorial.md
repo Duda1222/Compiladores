@@ -56,3 +56,14 @@ Experimente também:
 2. Escreva `iff = 1`. Por que `iff` não é palavra reservada?
 3. Quantos `DEDENT` aparecem ao fechar dois blocos aninhados de uma vez? (Exemplo 8.)
 4. O que muda na tabela ao colocar `# comentário` no fim de uma linha?
+
+## Próximo passo: o parser e a AST (Etapa 4)
+
+O scanner só entende **palavras**. Quem confere a **frase** é o **parser** (analisador sintático): ele verifica se os tokens formam um programa válido segundo a gramática ([`gramatica.md`](gramatica.md)) e monta uma árvore, a **AST**.
+
+1. Escolha o exemplo *10. Precedência e associatividade (AST)* e clique em **Analisar código**.
+2. Na seção **Análise sintática**, clique no nó `OperacaoBinaria +` da primeira linha: o painel mostra a regra da gramática, a posição e **o trecho do código** (`10 + 5 * 2`) destacado.
+3. Repare que o `*` está **mais fundo** que o `+`: é assim que a árvore diz "multiplique primeiro". Em `c = (10 + 5) * 2` os parênteses mudam a árvore e **somem** dela.
+4. Abra **Árvore de derivação** e compare: ela mostra todas as regras usadas (soma, termo, unário...), por isso é bem maior que a AST.
+5. Escolha o exemplo *11. Com erros sintáticos*. Cada erro traz linha, coluna, o que foi encontrado, o que era esperado e a regra violada. **Corrija sempre o primeiro**: os seguintes podem ser consequência dele.
+6. No exemplo *9. Com erros léxicos* o parser **não roda**, pois a lista de tokens está incompleta. Corrija os erros léxicos primeiro.
