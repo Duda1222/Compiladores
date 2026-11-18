@@ -19,7 +19,7 @@ Oferecer uma "porta de entrada" para o compilador educacional: o estudante escre
 
 Fluxo: ![Fluxo do compilador](docs/img/fluxo-compilador.png)
 
-Para quem está começando, veja o [tutorial](docs/tutorial.md). Documentação da Etapa 4: [gramática](docs/gramatica.md) · [AST](docs/ast.md) · [estratégia do parser, erros e decisões](docs/sintatico.md) · [registro de testes](docs/testes.md).
+Para quem está começando, veja o [tutorial](docs/tutorial.md). Documentação da Etapa 4: [gramática](docs/gramatica.md) · [AST](docs/ast.md) · [estratégia do parser, erros e decisões](docs/sintatico.md) · [registro de testes](docs/testes.md) · [casos de teste](docs/casos-de-teste.md) · [proposta, fluxograma e plano de avaliação](docs/proposta-etapa4.md).
 
 ## Linguagem escolhida e subconjunto
 
