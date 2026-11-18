@@ -1,0 +1,16 @@
+flowchart LR
+    A["Entrada<br/>código-fonte"] --> V{"Validação<br/>(vazio, tamanho)"}
+    V -- "inválida" --> E1["Erro de entrada<br/>HTTP 4xx"]
+    V -- "ok" --> L["Análise léxica<br/>(scanner, Etapa 3)"]
+    L --> TL["Tokens + erros léxicos"]
+    TL --> D{"Há erro<br/>léxico?"}
+    D -- "sim" --> R1["Resposta:<br/>erros léxicos<br/>sintatico.executado = false"]
+    D -- "não" --> S["Análise sintática<br/>(parser, Etapa 4)"]
+    S --> O{"Estrutura<br/>válida?"}
+    O -- "não" --> R2["Resposta:<br/>erros sintáticos<br/>ast = null"]
+    O -- "sim" --> AST["AST + árvore<br/>de derivação"]
+    AST --> SEM["Análise semântica<br/>(Etapa 5, a implementar)"]
+    SEM --> R3["Resultados na interface"]
+    R1 --> R3
+    R2 --> R3
+    style SEM stroke-dasharray: 5 5
