@@ -5,9 +5,10 @@ Endpoints:
   GET  /api/hello     -> mensagem da Etapa 1 (mantida para regressão)
   POST /api/analisar  -> recebe o código-fonte e devolve uma resposta estruturada
 
-Etapa 3: depois de validar a entrada, o backend executa o analisador léxico
-(scanner) e devolve tokens, erros léxicos e avisos. As análises sintática e
-semântica serão adicionadas nas próximas etapas.
+Fluxo: entrada -> validação -> scanner (Etapa 3) -> parser (Etapa 4) -> resposta.
+Se o scanner encontrar erros léxicos, o parser NÃO é executado (decisão
+documentada em docs/sintatico.md): a resposta traz "sintatico.executado": false.
+A análise semântica será a Etapa 5.
 """
 
 import logging
@@ -16,6 +17,7 @@ from flask import Flask, jsonify, request
 from werkzeug.exceptions import HTTPException
 
 from scanner import analisar_lexico
+from sintatico import analisar_sintatico, resultado_nao_executado
 from validacao import validar_corpo
 
 app = Flask(__name__)
@@ -56,15 +58,46 @@ def analisar():
     else:
         mensagem = f"Análise léxica concluída com {lexico.total_erros} erros léxicos."
 
-    # Um programa com erros léxicos é uma resposta válida (HTTP 200): o pedido
-    # foi processado e o resultado diz que a análise falhou ("sucesso": false).
+    sintatico = _executar_parser(lexico)
+
+    # Um programa com erros é uma resposta válida (HTTP 200): o pedido foi
+    # processado e os campos "sucesso" dizem o que passou. Os campos planos da
+    # Etapa 3 (sucesso, tokens, erros, avisos, resumo) foram mantidos; "lexico"
+    # e "sintatico" são o contrato da Etapa 4.
     return jsonify(
         recebido=True,
         mensagem=mensagem,
         linhas=len(codigo.splitlines()),
         caracteres=len(codigo),
+        lexico={
+            "sucesso": resposta["sucesso"],
+            "tokens": resposta["tokens"],
+            "erros": resposta["erros"],
+            "avisos": resposta["avisos"],
+            "resumo": resposta["resumo"],
+        },
+        sintatico=sintatico,
         **resposta,
     )
+
+
+def _executar_parser(lexico) -> dict:
+    """Roda o parser somente se não houve erro léxico."""
+    if not lexico.sucesso:
+        return resultado_nao_executado(
+            "A análise sintática não foi executada porque há erros léxicos. "
+            "Corrija-os primeiro: o parser só trabalha com uma sequência de tokens válida."
+        )
+    resultado = analisar_sintatico(lexico.tokens)
+    d = resultado.como_dict()
+    n = resultado.total_erros
+    if resultado.sucesso:
+        d["mensagem"] = "Análise sintática concluída sem erros."
+    elif n == 1:
+        d["mensagem"] = "Análise sintática concluída com 1 erro sintático."
+    else:
+        d["mensagem"] = f"Análise sintática concluída com {n} erros sintáticos."
+    return d
 
 
 @app.errorhandler(HTTPException)

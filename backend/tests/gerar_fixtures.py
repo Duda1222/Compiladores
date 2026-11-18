@@ -25,6 +25,8 @@ CASOS = {
     "html": "<b>x</b> = 1  # <script>alert(1)</script>\n",
     "tabulacao": "if x:\n\ty = 1\n",
     "decimais": "a = 2.5\nb = 3 >= a\n",
+    "sintatico_valido": "x = 10 + 5 * 2\nif x > 3:\n    y = (x - 1) / 2\nelse:\n    y = -x\n",
+    "sintatico_erro": "x = 10 +\ny = (3 * 4\nif x = 3:\n    z = 1\n",
 }
 
 

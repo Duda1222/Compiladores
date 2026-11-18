@@ -5,6 +5,27 @@
       "avisos": [],
       "caracteres": 19,
       "erros": [],
+      "lexico": {
+        "avisos": [],
+        "erros": [],
+        "resumo": {
+          "erros_omitidos": 0,
+          "por_tipo": {
+            "FIM_DE_ARQUIVO": 1
+          },
+          "total_erros": 0,
+          "total_tokens": 1
+        },
+        "sucesso": true,
+        "tokens": [
+          {
+            "coluna": 1,
+            "lexema": "",
+            "linha": 2,
+            "tipo": "FIM_DE_ARQUIVO"
+          }
+        ]
+      },
       "linhas": 1,
       "mensagem": "Análise léxica concluída sem erros.",
       "recebido": true,
@@ -15,6 +36,45 @@
         },
         "total_erros": 0,
         "total_tokens": 1
+      },
+      "sintatico": {
+        "ast": {
+          "atributos": {},
+          "coluna": 1,
+          "coluna_fim": 1,
+          "filhos": [],
+          "linha": 1,
+          "linha_fim": 1,
+          "papel": null,
+          "regra": "programa → { comando } FIM_DE_ARQUIVO",
+          "tipo": "Programa"
+        },
+        "derivacao": {
+          "filhos": [
+            {
+              "coluna": 1,
+              "lexema": "",
+              "linha": 2,
+              "simbolo": "FIM_DE_ARQUIVO",
+              "terminal": true,
+              "tipo": "FIM_DE_ARQUIVO"
+            }
+          ],
+          "simbolo": "programa"
+        },
+        "erros": [],
+        "executado": true,
+        "mensagem": "Análise sintática concluída sem erros.",
+        "resumo": {
+          "altura": 1,
+          "erros_omitidos": 0,
+          "por_tipo": {
+            "Programa": 1
+          },
+          "total_erros": 0,
+          "total_nos": 1
+        },
+        "sucesso": true
       },
       "sucesso": true,
       "tokens": [
@@ -33,6 +93,93 @@
       "avisos": [],
       "caracteres": 19,
       "erros": [],
+      "lexico": {
+        "avisos": [],
+        "erros": [],
+        "resumo": {
+          "erros_omitidos": 0,
+          "por_tipo": {
+            "FIM_DE_ARQUIVO": 1,
+            "IDENTIFICADOR": 3,
+            "LITERAL_DECIMAL": 1,
+            "LITERAL_INTEIRO": 1,
+            "NEWLINE": 2,
+            "OPERADOR_ATRIBUICAO": 2,
+            "OPERADOR_RELACIONAL": 1
+          },
+          "total_erros": 0,
+          "total_tokens": 11
+        },
+        "sucesso": true,
+        "tokens": [
+          {
+            "coluna": 1,
+            "lexema": "a",
+            "linha": 1,
+            "tipo": "IDENTIFICADOR"
+          },
+          {
+            "coluna": 3,
+            "lexema": "=",
+            "linha": 1,
+            "tipo": "OPERADOR_ATRIBUICAO"
+          },
+          {
+            "coluna": 5,
+            "lexema": "2.5",
+            "linha": 1,
+            "tipo": "LITERAL_DECIMAL"
+          },
+          {
+            "coluna": 8,
+            "lexema": "\n",
+            "linha": 1,
+            "tipo": "NEWLINE"
+          },
+          {
+            "coluna": 1,
+            "lexema": "b",
+            "linha": 2,
+            "tipo": "IDENTIFICADOR"
+          },
+          {
+            "coluna": 3,
+            "lexema": "=",
+            "linha": 2,
+            "tipo": "OPERADOR_ATRIBUICAO"
+          },
+          {
+            "coluna": 5,
+            "lexema": "3",
+            "linha": 2,
+            "tipo": "LITERAL_INTEIRO"
+          },
+          {
+            "coluna": 7,
+            "lexema": ">=",
+            "linha": 2,
+            "tipo": "OPERADOR_RELACIONAL"
+          },
+          {
+            "coluna": 10,
+            "lexema": "a",
+            "linha": 2,
+            "tipo": "IDENTIFICADOR"
+          },
+          {
+            "coluna": 11,
+            "lexema": "\n",
+            "linha": 2,
+            "tipo": "NEWLINE"
+          },
+          {
+            "coluna": 1,
+            "lexema": "",
+            "linha": 3,
+            "tipo": "FIM_DE_ARQUIVO"
+          }
+        ]
+      },
       "linhas": 2,
       "mensagem": "Análise léxica concluída sem erros.",
       "recebido": true,
@@ -49,6 +196,336 @@
         },
         "total_erros": 0,
         "total_tokens": 11
+      },
+      "sintatico": {
+        "ast": {
+          "atributos": {},
+          "coluna": 1,
+          "coluna_fim": 11,
+          "filhos": [
+            {
+              "atributos": {},
+              "coluna": 1,
+              "coluna_fim": 8,
+              "filhos": [
+                {
+                  "atributos": {
+                    "nome": "a"
+                  },
+                  "coluna": 1,
+                  "coluna_fim": 2,
+                  "filhos": [],
+                  "linha": 1,
+                  "linha_fim": 1,
+                  "papel": "alvo",
+                  "regra": "primario → IDENTIFICADOR",
+                  "tipo": "Identificador"
+                },
+                {
+                  "atributos": {
+                    "lexema": "2.5",
+                    "tipo_numero": "decimal"
+                  },
+                  "coluna": 5,
+                  "coluna_fim": 8,
+                  "filhos": [],
+                  "linha": 1,
+                  "linha_fim": 1,
+                  "papel": "valor",
+                  "regra": "primario → LITERAL_INTEIRO | LITERAL_DECIMAL",
+                  "tipo": "Numero"
+                }
+              ],
+              "linha": 1,
+              "linha_fim": 1,
+              "papel": "comando",
+              "regra": "atribuicao → IDENTIFICADOR '=' expressao",
+              "tipo": "Atribuicao"
+            },
+            {
+              "atributos": {},
+              "coluna": 1,
+              "coluna_fim": 11,
+              "filhos": [
+                {
+                  "atributos": {
+                    "nome": "b"
+                  },
+                  "coluna": 1,
+                  "coluna_fim": 2,
+                  "filhos": [],
+                  "linha": 2,
+                  "linha_fim": 2,
+                  "papel": "alvo",
+                  "regra": "primario → IDENTIFICADOR",
+                  "tipo": "Identificador"
+                },
+                {
+                  "atributos": {
+                    "categoria": "relacional",
+                    "operador": ">="
+                  },
+                  "coluna": 5,
+                  "coluna_fim": 11,
+                  "filhos": [
+                    {
+                      "atributos": {
+                        "lexema": "3",
+                        "tipo_numero": "inteiro"
+                      },
+                      "coluna": 5,
+                      "coluna_fim": 6,
+                      "filhos": [],
+                      "linha": 2,
+                      "linha_fim": 2,
+                      "papel": "esquerda",
+                      "regra": "primario → LITERAL_INTEIRO | LITERAL_DECIMAL",
+                      "tipo": "Numero"
+                    },
+                    {
+                      "atributos": {
+                        "nome": "a"
+                      },
+                      "coluna": 10,
+                      "coluna_fim": 11,
+                      "filhos": [],
+                      "linha": 2,
+                      "linha_fim": 2,
+                      "papel": "direita",
+                      "regra": "primario → IDENTIFICADOR",
+                      "tipo": "Identificador"
+                    }
+                  ],
+                  "linha": 2,
+                  "linha_fim": 2,
+                  "papel": "valor",
+                  "regra": "expressao → soma [ OPERADOR_RELACIONAL soma ]",
+                  "tipo": "Comparacao"
+                }
+              ],
+              "linha": 2,
+              "linha_fim": 2,
+              "papel": "comando",
+              "regra": "atribuicao → IDENTIFICADOR '=' expressao",
+              "tipo": "Atribuicao"
+            }
+          ],
+          "linha": 1,
+          "linha_fim": 2,
+          "papel": null,
+          "regra": "programa → { comando } FIM_DE_ARQUIVO",
+          "tipo": "Programa"
+        },
+        "derivacao": {
+          "filhos": [
+            {
+              "filhos": [
+                {
+                  "filhos": [
+                    {
+                      "filhos": [
+                        {
+                          "coluna": 1,
+                          "lexema": "a",
+                          "linha": 1,
+                          "simbolo": "IDENTIFICADOR",
+                          "terminal": true,
+                          "tipo": "IDENTIFICADOR"
+                        },
+                        {
+                          "coluna": 3,
+                          "lexema": "=",
+                          "linha": 1,
+                          "simbolo": "=",
+                          "terminal": true,
+                          "tipo": "OPERADOR_ATRIBUICAO"
+                        },
+                        {
+                          "filhos": [
+                            {
+                              "filhos": [
+                                {
+                                  "filhos": [
+                                    {
+                                      "filhos": [
+                                        {
+                                          "filhos": [
+                                            {
+                                              "coluna": 5,
+                                              "lexema": "2.5",
+                                              "linha": 1,
+                                              "simbolo": "LITERAL_DECIMAL",
+                                              "terminal": true,
+                                              "tipo": "LITERAL_DECIMAL"
+                                            }
+                                          ],
+                                          "simbolo": "primario"
+                                        }
+                                      ],
+                                      "simbolo": "unario"
+                                    }
+                                  ],
+                                  "simbolo": "termo"
+                                }
+                              ],
+                              "simbolo": "soma"
+                            }
+                          ],
+                          "simbolo": "expressao"
+                        }
+                      ],
+                      "simbolo": "atribuicao"
+                    },
+                    {
+                      "coluna": 8,
+                      "lexema": "\n",
+                      "linha": 1,
+                      "simbolo": "NEWLINE",
+                      "terminal": true,
+                      "tipo": "NEWLINE"
+                    }
+                  ],
+                  "simbolo": "comando_simples"
+                }
+              ],
+              "simbolo": "comando"
+            },
+            {
+              "filhos": [
+                {
+                  "filhos": [
+                    {
+                      "filhos": [
+                        {
+                          "coluna": 1,
+                          "lexema": "b",
+                          "linha": 2,
+                          "simbolo": "IDENTIFICADOR",
+                          "terminal": true,
+                          "tipo": "IDENTIFICADOR"
+                        },
+                        {
+                          "coluna": 3,
+                          "lexema": "=",
+                          "linha": 2,
+                          "simbolo": "=",
+                          "terminal": true,
+                          "tipo": "OPERADOR_ATRIBUICAO"
+                        },
+                        {
+                          "filhos": [
+                            {
+                              "filhos": [
+                                {
+                                  "filhos": [
+                                    {
+                                      "filhos": [
+                                        {
+                                          "filhos": [
+                                            {
+                                              "coluna": 5,
+                                              "lexema": "3",
+                                              "linha": 2,
+                                              "simbolo": "LITERAL_INTEIRO",
+                                              "terminal": true,
+                                              "tipo": "LITERAL_INTEIRO"
+                                            }
+                                          ],
+                                          "simbolo": "primario"
+                                        }
+                                      ],
+                                      "simbolo": "unario"
+                                    }
+                                  ],
+                                  "simbolo": "termo"
+                                }
+                              ],
+                              "simbolo": "soma"
+                            },
+                            {
+                              "coluna": 7,
+                              "lexema": ">=",
+                              "linha": 2,
+                              "simbolo": "OPERADOR_RELACIONAL",
+                              "terminal": true,
+                              "tipo": "OPERADOR_RELACIONAL"
+                            },
+                            {
+                              "filhos": [
+                                {
+                                  "filhos": [
+                                    {
+                                      "filhos": [
+                                        {
+                                          "filhos": [
+                                            {
+                                              "coluna": 10,
+                                              "lexema": "a",
+                                              "linha": 2,
+                                              "simbolo": "IDENTIFICADOR",
+                                              "terminal": true,
+                                              "tipo": "IDENTIFICADOR"
+                                            }
+                                          ],
+                                          "simbolo": "primario"
+                                        }
+                                      ],
+                                      "simbolo": "unario"
+                                    }
+                                  ],
+                                  "simbolo": "termo"
+                                }
+                              ],
+                              "simbolo": "soma"
+                            }
+                          ],
+                          "simbolo": "expressao"
+                        }
+                      ],
+                      "simbolo": "atribuicao"
+                    },
+                    {
+                      "coluna": 11,
+                      "lexema": "\n",
+                      "linha": 2,
+                      "simbolo": "NEWLINE",
+                      "terminal": true,
+                      "tipo": "NEWLINE"
+                    }
+                  ],
+                  "simbolo": "comando_simples"
+                }
+              ],
+              "simbolo": "comando"
+            },
+            {
+              "coluna": 1,
+              "lexema": "",
+              "linha": 3,
+              "simbolo": "FIM_DE_ARQUIVO",
+              "terminal": true,
+              "tipo": "FIM_DE_ARQUIVO"
+            }
+          ],
+          "simbolo": "programa"
+        },
+        "erros": [],
+        "executado": true,
+        "mensagem": "Análise sintática concluída sem erros.",
+        "resumo": {
+          "altura": 4,
+          "erros_omitidos": 0,
+          "por_tipo": {
+            "Atribuicao": 2,
+            "Comparacao": 1,
+            "Identificador": 3,
+            "Numero": 2,
+            "Programa": 1
+          },
+          "total_erros": 0,
+          "total_nos": 9
+        },
+        "sucesso": true
       },
       "sucesso": true,
       "tokens": [
@@ -164,6 +641,171 @@
           "tipo": "ERRO_LEXICO"
         }
       ],
+      "lexico": {
+        "avisos": [
+          {
+            "coluna": 1,
+            "lexema": "def",
+            "linha": 5,
+            "mensagem": "'def' é palavra reservada do Python, mas ainda não faz parte do subconjunto. O scanner a reconhece; as próximas etapas poderão não aceitá-la.",
+            "tipo": "AVISO_FORA_DO_ESCOPO"
+          }
+        ],
+        "erros": [
+          {
+            "coluna": 12,
+            "lexema": "@",
+            "linha": 1,
+            "mensagem": "Caractere não reconhecido: '@'. Ele existe em Python, mas ainda não faz parte do subconjunto suportado.",
+            "tipo": "ERRO_LEXICO"
+          },
+          {
+            "coluna": 9,
+            "lexema": "3.14.15",
+            "linha": 2,
+            "mensagem": "Literal numérico malformado '3.14.15': literal com mais de um ponto decimal.",
+            "tipo": "ERRO_LEXICO"
+          },
+          {
+            "coluna": 8,
+            "lexema": "\"Ana\"",
+            "linha": 3,
+            "mensagem": "String \"Ana\" não reconhecida: strings ainda não fazem parte do subconjunto.",
+            "tipo": "ERRO_LEXICO"
+          },
+          {
+            "coluna": 5,
+            "lexema": "12abc",
+            "linha": 4,
+            "mensagem": "Literal numérico malformado '12abc': um número não pode ser seguido de letras (identificadores não começam com dígito).",
+            "tipo": "ERRO_LEXICO"
+          }
+        ],
+        "resumo": {
+          "erros_omitidos": 0,
+          "por_tipo": {
+            "FIM_DE_ARQUIVO": 1,
+            "IDENTIFICADOR": 5,
+            "LITERAL_INTEIRO": 2,
+            "NEWLINE": 5,
+            "OPERADOR_ATRIBUICAO": 4,
+            "PALAVRA_RESERVADA": 1
+          },
+          "total_erros": 4,
+          "total_tokens": 18
+        },
+        "sucesso": false,
+        "tokens": [
+          {
+            "coluna": 1,
+            "lexema": "preco",
+            "linha": 1,
+            "tipo": "IDENTIFICADOR"
+          },
+          {
+            "coluna": 7,
+            "lexema": "=",
+            "linha": 1,
+            "tipo": "OPERADOR_ATRIBUICAO"
+          },
+          {
+            "coluna": 9,
+            "lexema": "10",
+            "linha": 1,
+            "tipo": "LITERAL_INTEIRO"
+          },
+          {
+            "coluna": 14,
+            "lexema": "2",
+            "linha": 1,
+            "tipo": "LITERAL_INTEIRO"
+          },
+          {
+            "coluna": 15,
+            "lexema": "\n",
+            "linha": 1,
+            "tipo": "NEWLINE"
+          },
+          {
+            "coluna": 1,
+            "lexema": "valor",
+            "linha": 2,
+            "tipo": "IDENTIFICADOR"
+          },
+          {
+            "coluna": 7,
+            "lexema": "=",
+            "linha": 2,
+            "tipo": "OPERADOR_ATRIBUICAO"
+          },
+          {
+            "coluna": 16,
+            "lexema": "\n",
+            "linha": 2,
+            "tipo": "NEWLINE"
+          },
+          {
+            "coluna": 1,
+            "lexema": "nome",
+            "linha": 3,
+            "tipo": "IDENTIFICADOR"
+          },
+          {
+            "coluna": 6,
+            "lexema": "=",
+            "linha": 3,
+            "tipo": "OPERADOR_ATRIBUICAO"
+          },
+          {
+            "coluna": 13,
+            "lexema": "\n",
+            "linha": 3,
+            "tipo": "NEWLINE"
+          },
+          {
+            "coluna": 1,
+            "lexema": "y",
+            "linha": 4,
+            "tipo": "IDENTIFICADOR"
+          },
+          {
+            "coluna": 3,
+            "lexema": "=",
+            "linha": 4,
+            "tipo": "OPERADOR_ATRIBUICAO"
+          },
+          {
+            "coluna": 10,
+            "lexema": "\n",
+            "linha": 4,
+            "tipo": "NEWLINE"
+          },
+          {
+            "coluna": 1,
+            "lexema": "def",
+            "linha": 5,
+            "tipo": "PALAVRA_RESERVADA"
+          },
+          {
+            "coluna": 5,
+            "lexema": "f",
+            "linha": 5,
+            "tipo": "IDENTIFICADOR"
+          },
+          {
+            "coluna": 6,
+            "lexema": "\n",
+            "linha": 5,
+            "tipo": "NEWLINE"
+          },
+          {
+            "coluna": 1,
+            "lexema": "",
+            "linha": 6,
+            "tipo": "FIM_DE_ARQUIVO"
+          }
+        ]
+      },
       "linhas": 5,
       "mensagem": "Análise léxica concluída com 4 erros léxicos.",
       "recebido": true,
@@ -179,6 +821,18 @@
         },
         "total_erros": 4,
         "total_tokens": 18
+      },
+      "sintatico": {
+        "ast": null,
+        "derivacao": null,
+        "erros": [],
+        "executado": false,
+        "mensagem": "A análise sintática não foi executada porque há erros léxicos. Corrija-os primeiro: o parser só trabalha com uma sequência de tokens válida.",
+        "resumo": {
+          "erros_omitidos": 0,
+          "total_erros": 0
+        },
+        "sucesso": false
       },
       "sucesso": false,
       "tokens": [
@@ -299,6 +953,99 @@
       "avisos": [],
       "caracteres": 42,
       "erros": [],
+      "lexico": {
+        "avisos": [],
+        "erros": [],
+        "resumo": {
+          "erros_omitidos": 0,
+          "por_tipo": {
+            "FIM_DE_ARQUIVO": 1,
+            "IDENTIFICADOR": 3,
+            "LITERAL_INTEIRO": 1,
+            "NEWLINE": 1,
+            "OPERADOR_ARITMETICO": 1,
+            "OPERADOR_ATRIBUICAO": 1,
+            "OPERADOR_RELACIONAL": 4
+          },
+          "total_erros": 0,
+          "total_tokens": 12
+        },
+        "sucesso": true,
+        "tokens": [
+          {
+            "coluna": 1,
+            "lexema": "<",
+            "linha": 1,
+            "tipo": "OPERADOR_RELACIONAL"
+          },
+          {
+            "coluna": 2,
+            "lexema": "b",
+            "linha": 1,
+            "tipo": "IDENTIFICADOR"
+          },
+          {
+            "coluna": 3,
+            "lexema": ">",
+            "linha": 1,
+            "tipo": "OPERADOR_RELACIONAL"
+          },
+          {
+            "coluna": 4,
+            "lexema": "x",
+            "linha": 1,
+            "tipo": "IDENTIFICADOR"
+          },
+          {
+            "coluna": 5,
+            "lexema": "<",
+            "linha": 1,
+            "tipo": "OPERADOR_RELACIONAL"
+          },
+          {
+            "coluna": 6,
+            "lexema": "/",
+            "linha": 1,
+            "tipo": "OPERADOR_ARITMETICO"
+          },
+          {
+            "coluna": 7,
+            "lexema": "b",
+            "linha": 1,
+            "tipo": "IDENTIFICADOR"
+          },
+          {
+            "coluna": 8,
+            "lexema": ">",
+            "linha": 1,
+            "tipo": "OPERADOR_RELACIONAL"
+          },
+          {
+            "coluna": 10,
+            "lexema": "=",
+            "linha": 1,
+            "tipo": "OPERADOR_ATRIBUICAO"
+          },
+          {
+            "coluna": 12,
+            "lexema": "1",
+            "linha": 1,
+            "tipo": "LITERAL_INTEIRO"
+          },
+          {
+            "coluna": 42,
+            "lexema": "\n",
+            "linha": 1,
+            "tipo": "NEWLINE"
+          },
+          {
+            "coluna": 1,
+            "lexema": "",
+            "linha": 2,
+            "tipo": "FIM_DE_ARQUIVO"
+          }
+        ]
+      },
       "linhas": 1,
       "mensagem": "Análise léxica concluída sem erros.",
       "recebido": true,
@@ -315,6 +1062,34 @@
         },
         "total_erros": 0,
         "total_tokens": 12
+      },
+      "sintatico": {
+        "ast": null,
+        "derivacao": null,
+        "erros": [
+          {
+            "coluna": 1,
+            "encontrado": "<",
+            "esperado": [
+              "identificador",
+              "número",
+              "'('",
+              "'if'",
+              "'while'"
+            ],
+            "linha": 1,
+            "mensagem": "Esperava o início de um comando (identificador, número, '(', 'if' ou 'while'), mas encontrei '<'.",
+            "regra": "comando → comando_simples | condicional | repeticao",
+            "tipo": "ERRO_SINTATICO"
+          }
+        ],
+        "executado": true,
+        "mensagem": "Análise sintática concluída com 1 erro sintático.",
+        "resumo": {
+          "erros_omitidos": 0,
+          "total_erros": 1
+        },
+        "sucesso": false
       },
       "sucesso": true,
       "tokens": [
@@ -393,6 +1168,1775 @@
       ]
     }
   },
+  "sintatico_erro": {
+    "codigo": "x = 10 +\ny = (3 * 4\nif x = 3:\n    z = 1\n",
+    "resposta": {
+      "avisos": [],
+      "caracteres": 40,
+      "erros": [],
+      "lexico": {
+        "avisos": [],
+        "erros": [],
+        "resumo": {
+          "erros_omitidos": 0,
+          "por_tipo": {
+            "DELIMITADOR": 2,
+            "FIM_DE_ARQUIVO": 1,
+            "IDENTIFICADOR": 4,
+            "LITERAL_INTEIRO": 5,
+            "NEWLINE": 2,
+            "OPERADOR_ARITMETICO": 2,
+            "OPERADOR_ATRIBUICAO": 4,
+            "PALAVRA_RESERVADA": 1
+          },
+          "total_erros": 0,
+          "total_tokens": 21
+        },
+        "sucesso": true,
+        "tokens": [
+          {
+            "coluna": 1,
+            "lexema": "x",
+            "linha": 1,
+            "tipo": "IDENTIFICADOR"
+          },
+          {
+            "coluna": 3,
+            "lexema": "=",
+            "linha": 1,
+            "tipo": "OPERADOR_ATRIBUICAO"
+          },
+          {
+            "coluna": 5,
+            "lexema": "10",
+            "linha": 1,
+            "tipo": "LITERAL_INTEIRO"
+          },
+          {
+            "coluna": 8,
+            "lexema": "+",
+            "linha": 1,
+            "tipo": "OPERADOR_ARITMETICO"
+          },
+          {
+            "coluna": 9,
+            "lexema": "\n",
+            "linha": 1,
+            "tipo": "NEWLINE"
+          },
+          {
+            "coluna": 1,
+            "lexema": "y",
+            "linha": 2,
+            "tipo": "IDENTIFICADOR"
+          },
+          {
+            "coluna": 3,
+            "lexema": "=",
+            "linha": 2,
+            "tipo": "OPERADOR_ATRIBUICAO"
+          },
+          {
+            "coluna": 5,
+            "lexema": "(",
+            "linha": 2,
+            "tipo": "DELIMITADOR"
+          },
+          {
+            "coluna": 6,
+            "lexema": "3",
+            "linha": 2,
+            "tipo": "LITERAL_INTEIRO"
+          },
+          {
+            "coluna": 8,
+            "lexema": "*",
+            "linha": 2,
+            "tipo": "OPERADOR_ARITMETICO"
+          },
+          {
+            "coluna": 10,
+            "lexema": "4",
+            "linha": 2,
+            "tipo": "LITERAL_INTEIRO"
+          },
+          {
+            "coluna": 1,
+            "lexema": "if",
+            "linha": 3,
+            "tipo": "PALAVRA_RESERVADA"
+          },
+          {
+            "coluna": 4,
+            "lexema": "x",
+            "linha": 3,
+            "tipo": "IDENTIFICADOR"
+          },
+          {
+            "coluna": 6,
+            "lexema": "=",
+            "linha": 3,
+            "tipo": "OPERADOR_ATRIBUICAO"
+          },
+          {
+            "coluna": 8,
+            "lexema": "3",
+            "linha": 3,
+            "tipo": "LITERAL_INTEIRO"
+          },
+          {
+            "coluna": 9,
+            "lexema": ":",
+            "linha": 3,
+            "tipo": "DELIMITADOR"
+          },
+          {
+            "coluna": 5,
+            "lexema": "z",
+            "linha": 4,
+            "tipo": "IDENTIFICADOR"
+          },
+          {
+            "coluna": 7,
+            "lexema": "=",
+            "linha": 4,
+            "tipo": "OPERADOR_ATRIBUICAO"
+          },
+          {
+            "coluna": 9,
+            "lexema": "1",
+            "linha": 4,
+            "tipo": "LITERAL_INTEIRO"
+          },
+          {
+            "coluna": 1,
+            "lexema": "",
+            "linha": 5,
+            "tipo": "NEWLINE"
+          },
+          {
+            "coluna": 1,
+            "lexema": "",
+            "linha": 5,
+            "tipo": "FIM_DE_ARQUIVO"
+          }
+        ]
+      },
+      "linhas": 4,
+      "mensagem": "Análise léxica concluída sem erros.",
+      "recebido": true,
+      "resumo": {
+        "erros_omitidos": 0,
+        "por_tipo": {
+          "DELIMITADOR": 2,
+          "FIM_DE_ARQUIVO": 1,
+          "IDENTIFICADOR": 4,
+          "LITERAL_INTEIRO": 5,
+          "NEWLINE": 2,
+          "OPERADOR_ARITMETICO": 2,
+          "OPERADOR_ATRIBUICAO": 4,
+          "PALAVRA_RESERVADA": 1
+        },
+        "total_erros": 0,
+        "total_tokens": 21
+      },
+      "sintatico": {
+        "ast": null,
+        "derivacao": null,
+        "erros": [
+          {
+            "coluna": 9,
+            "encontrado": "fim da linha",
+            "esperado": [
+              "identificador",
+              "número",
+              "'('",
+              "'-'",
+              "'+'"
+            ],
+            "linha": 1,
+            "mensagem": "A expressão termina em '+', mas falta o operando à direita dele (esperava identificador, número ou '(').",
+            "regra": "primario → LITERAL_INTEIRO | LITERAL_DECIMAL | IDENTIFICADOR | '(' expressao ')'",
+            "tipo": "ERRO_SINTATICO"
+          },
+          {
+            "coluna": 1,
+            "dica": "Feche com ')' o '(' da linha 2, coluna 5.",
+            "encontrado": "if",
+            "esperado": [
+              "')'",
+              "operador"
+            ],
+            "linha": 3,
+            "mensagem": "Esperava ')' ou um operador, mas encontrei a palavra reservada 'if'.",
+            "regra": "primario → '(' expressao ')'",
+            "tipo": "ERRO_SINTATICO"
+          }
+        ],
+        "executado": true,
+        "mensagem": "Análise sintática concluída com 2 erros sintáticos.",
+        "resumo": {
+          "erros_omitidos": 0,
+          "total_erros": 2
+        },
+        "sucesso": false
+      },
+      "sucesso": true,
+      "tokens": [
+        {
+          "coluna": 1,
+          "lexema": "x",
+          "linha": 1,
+          "tipo": "IDENTIFICADOR"
+        },
+        {
+          "coluna": 3,
+          "lexema": "=",
+          "linha": 1,
+          "tipo": "OPERADOR_ATRIBUICAO"
+        },
+        {
+          "coluna": 5,
+          "lexema": "10",
+          "linha": 1,
+          "tipo": "LITERAL_INTEIRO"
+        },
+        {
+          "coluna": 8,
+          "lexema": "+",
+          "linha": 1,
+          "tipo": "OPERADOR_ARITMETICO"
+        },
+        {
+          "coluna": 9,
+          "lexema": "\n",
+          "linha": 1,
+          "tipo": "NEWLINE"
+        },
+        {
+          "coluna": 1,
+          "lexema": "y",
+          "linha": 2,
+          "tipo": "IDENTIFICADOR"
+        },
+        {
+          "coluna": 3,
+          "lexema": "=",
+          "linha": 2,
+          "tipo": "OPERADOR_ATRIBUICAO"
+        },
+        {
+          "coluna": 5,
+          "lexema": "(",
+          "linha": 2,
+          "tipo": "DELIMITADOR"
+        },
+        {
+          "coluna": 6,
+          "lexema": "3",
+          "linha": 2,
+          "tipo": "LITERAL_INTEIRO"
+        },
+        {
+          "coluna": 8,
+          "lexema": "*",
+          "linha": 2,
+          "tipo": "OPERADOR_ARITMETICO"
+        },
+        {
+          "coluna": 10,
+          "lexema": "4",
+          "linha": 2,
+          "tipo": "LITERAL_INTEIRO"
+        },
+        {
+          "coluna": 1,
+          "lexema": "if",
+          "linha": 3,
+          "tipo": "PALAVRA_RESERVADA"
+        },
+        {
+          "coluna": 4,
+          "lexema": "x",
+          "linha": 3,
+          "tipo": "IDENTIFICADOR"
+        },
+        {
+          "coluna": 6,
+          "lexema": "=",
+          "linha": 3,
+          "tipo": "OPERADOR_ATRIBUICAO"
+        },
+        {
+          "coluna": 8,
+          "lexema": "3",
+          "linha": 3,
+          "tipo": "LITERAL_INTEIRO"
+        },
+        {
+          "coluna": 9,
+          "lexema": ":",
+          "linha": 3,
+          "tipo": "DELIMITADOR"
+        },
+        {
+          "coluna": 5,
+          "lexema": "z",
+          "linha": 4,
+          "tipo": "IDENTIFICADOR"
+        },
+        {
+          "coluna": 7,
+          "lexema": "=",
+          "linha": 4,
+          "tipo": "OPERADOR_ATRIBUICAO"
+        },
+        {
+          "coluna": 9,
+          "lexema": "1",
+          "linha": 4,
+          "tipo": "LITERAL_INTEIRO"
+        },
+        {
+          "coluna": 1,
+          "lexema": "",
+          "linha": 5,
+          "tipo": "NEWLINE"
+        },
+        {
+          "coluna": 1,
+          "lexema": "",
+          "linha": 5,
+          "tipo": "FIM_DE_ARQUIVO"
+        }
+      ]
+    }
+  },
+  "sintatico_valido": {
+    "codigo": "x = 10 + 5 * 2\nif x > 3:\n    y = (x - 1) / 2\nelse:\n    y = -x\n",
+    "resposta": {
+      "avisos": [],
+      "caracteres": 62,
+      "erros": [],
+      "lexico": {
+        "avisos": [],
+        "erros": [],
+        "resumo": {
+          "erros_omitidos": 0,
+          "por_tipo": {
+            "DEDENT": 2,
+            "DELIMITADOR": 4,
+            "FIM_DE_ARQUIVO": 1,
+            "IDENTIFICADOR": 6,
+            "INDENT": 2,
+            "LITERAL_INTEIRO": 6,
+            "NEWLINE": 5,
+            "OPERADOR_ARITMETICO": 5,
+            "OPERADOR_ATRIBUICAO": 3,
+            "OPERADOR_RELACIONAL": 1,
+            "PALAVRA_RESERVADA": 2
+          },
+          "total_erros": 0,
+          "total_tokens": 37
+        },
+        "sucesso": true,
+        "tokens": [
+          {
+            "coluna": 1,
+            "lexema": "x",
+            "linha": 1,
+            "tipo": "IDENTIFICADOR"
+          },
+          {
+            "coluna": 3,
+            "lexema": "=",
+            "linha": 1,
+            "tipo": "OPERADOR_ATRIBUICAO"
+          },
+          {
+            "coluna": 5,
+            "lexema": "10",
+            "linha": 1,
+            "tipo": "LITERAL_INTEIRO"
+          },
+          {
+            "coluna": 8,
+            "lexema": "+",
+            "linha": 1,
+            "tipo": "OPERADOR_ARITMETICO"
+          },
+          {
+            "coluna": 10,
+            "lexema": "5",
+            "linha": 1,
+            "tipo": "LITERAL_INTEIRO"
+          },
+          {
+            "coluna": 12,
+            "lexema": "*",
+            "linha": 1,
+            "tipo": "OPERADOR_ARITMETICO"
+          },
+          {
+            "coluna": 14,
+            "lexema": "2",
+            "linha": 1,
+            "tipo": "LITERAL_INTEIRO"
+          },
+          {
+            "coluna": 15,
+            "lexema": "\n",
+            "linha": 1,
+            "tipo": "NEWLINE"
+          },
+          {
+            "coluna": 1,
+            "lexema": "if",
+            "linha": 2,
+            "tipo": "PALAVRA_RESERVADA"
+          },
+          {
+            "coluna": 4,
+            "lexema": "x",
+            "linha": 2,
+            "tipo": "IDENTIFICADOR"
+          },
+          {
+            "coluna": 6,
+            "lexema": ">",
+            "linha": 2,
+            "tipo": "OPERADOR_RELACIONAL"
+          },
+          {
+            "coluna": 8,
+            "lexema": "3",
+            "linha": 2,
+            "tipo": "LITERAL_INTEIRO"
+          },
+          {
+            "coluna": 9,
+            "lexema": ":",
+            "linha": 2,
+            "tipo": "DELIMITADOR"
+          },
+          {
+            "coluna": 10,
+            "lexema": "\n",
+            "linha": 2,
+            "tipo": "NEWLINE"
+          },
+          {
+            "coluna": 1,
+            "lexema": "    ",
+            "linha": 3,
+            "tipo": "INDENT"
+          },
+          {
+            "coluna": 5,
+            "lexema": "y",
+            "linha": 3,
+            "tipo": "IDENTIFICADOR"
+          },
+          {
+            "coluna": 7,
+            "lexema": "=",
+            "linha": 3,
+            "tipo": "OPERADOR_ATRIBUICAO"
+          },
+          {
+            "coluna": 9,
+            "lexema": "(",
+            "linha": 3,
+            "tipo": "DELIMITADOR"
+          },
+          {
+            "coluna": 10,
+            "lexema": "x",
+            "linha": 3,
+            "tipo": "IDENTIFICADOR"
+          },
+          {
+            "coluna": 12,
+            "lexema": "-",
+            "linha": 3,
+            "tipo": "OPERADOR_ARITMETICO"
+          },
+          {
+            "coluna": 14,
+            "lexema": "1",
+            "linha": 3,
+            "tipo": "LITERAL_INTEIRO"
+          },
+          {
+            "coluna": 15,
+            "lexema": ")",
+            "linha": 3,
+            "tipo": "DELIMITADOR"
+          },
+          {
+            "coluna": 17,
+            "lexema": "/",
+            "linha": 3,
+            "tipo": "OPERADOR_ARITMETICO"
+          },
+          {
+            "coluna": 19,
+            "lexema": "2",
+            "linha": 3,
+            "tipo": "LITERAL_INTEIRO"
+          },
+          {
+            "coluna": 20,
+            "lexema": "\n",
+            "linha": 3,
+            "tipo": "NEWLINE"
+          },
+          {
+            "coluna": 1,
+            "lexema": "",
+            "linha": 4,
+            "tipo": "DEDENT"
+          },
+          {
+            "coluna": 1,
+            "lexema": "else",
+            "linha": 4,
+            "tipo": "PALAVRA_RESERVADA"
+          },
+          {
+            "coluna": 5,
+            "lexema": ":",
+            "linha": 4,
+            "tipo": "DELIMITADOR"
+          },
+          {
+            "coluna": 6,
+            "lexema": "\n",
+            "linha": 4,
+            "tipo": "NEWLINE"
+          },
+          {
+            "coluna": 1,
+            "lexema": "    ",
+            "linha": 5,
+            "tipo": "INDENT"
+          },
+          {
+            "coluna": 5,
+            "lexema": "y",
+            "linha": 5,
+            "tipo": "IDENTIFICADOR"
+          },
+          {
+            "coluna": 7,
+            "lexema": "=",
+            "linha": 5,
+            "tipo": "OPERADOR_ATRIBUICAO"
+          },
+          {
+            "coluna": 9,
+            "lexema": "-",
+            "linha": 5,
+            "tipo": "OPERADOR_ARITMETICO"
+          },
+          {
+            "coluna": 10,
+            "lexema": "x",
+            "linha": 5,
+            "tipo": "IDENTIFICADOR"
+          },
+          {
+            "coluna": 11,
+            "lexema": "\n",
+            "linha": 5,
+            "tipo": "NEWLINE"
+          },
+          {
+            "coluna": 1,
+            "lexema": "",
+            "linha": 6,
+            "tipo": "DEDENT"
+          },
+          {
+            "coluna": 1,
+            "lexema": "",
+            "linha": 6,
+            "tipo": "FIM_DE_ARQUIVO"
+          }
+        ]
+      },
+      "linhas": 5,
+      "mensagem": "Análise léxica concluída sem erros.",
+      "recebido": true,
+      "resumo": {
+        "erros_omitidos": 0,
+        "por_tipo": {
+          "DEDENT": 2,
+          "DELIMITADOR": 4,
+          "FIM_DE_ARQUIVO": 1,
+          "IDENTIFICADOR": 6,
+          "INDENT": 2,
+          "LITERAL_INTEIRO": 6,
+          "NEWLINE": 5,
+          "OPERADOR_ARITMETICO": 5,
+          "OPERADOR_ATRIBUICAO": 3,
+          "OPERADOR_RELACIONAL": 1,
+          "PALAVRA_RESERVADA": 2
+        },
+        "total_erros": 0,
+        "total_tokens": 37
+      },
+      "sintatico": {
+        "ast": {
+          "atributos": {},
+          "coluna": 1,
+          "coluna_fim": 11,
+          "filhos": [
+            {
+              "atributos": {},
+              "coluna": 1,
+              "coluna_fim": 15,
+              "filhos": [
+                {
+                  "atributos": {
+                    "nome": "x"
+                  },
+                  "coluna": 1,
+                  "coluna_fim": 2,
+                  "filhos": [],
+                  "linha": 1,
+                  "linha_fim": 1,
+                  "papel": "alvo",
+                  "regra": "primario → IDENTIFICADOR",
+                  "tipo": "Identificador"
+                },
+                {
+                  "atributos": {
+                    "categoria": "aritmetica",
+                    "operador": "+"
+                  },
+                  "coluna": 5,
+                  "coluna_fim": 15,
+                  "filhos": [
+                    {
+                      "atributos": {
+                        "lexema": "10",
+                        "tipo_numero": "inteiro"
+                      },
+                      "coluna": 5,
+                      "coluna_fim": 7,
+                      "filhos": [],
+                      "linha": 1,
+                      "linha_fim": 1,
+                      "papel": "esquerda",
+                      "regra": "primario → LITERAL_INTEIRO | LITERAL_DECIMAL",
+                      "tipo": "Numero"
+                    },
+                    {
+                      "atributos": {
+                        "categoria": "aritmetica",
+                        "operador": "*"
+                      },
+                      "coluna": 10,
+                      "coluna_fim": 15,
+                      "filhos": [
+                        {
+                          "atributos": {
+                            "lexema": "5",
+                            "tipo_numero": "inteiro"
+                          },
+                          "coluna": 10,
+                          "coluna_fim": 11,
+                          "filhos": [],
+                          "linha": 1,
+                          "linha_fim": 1,
+                          "papel": "esquerda",
+                          "regra": "primario → LITERAL_INTEIRO | LITERAL_DECIMAL",
+                          "tipo": "Numero"
+                        },
+                        {
+                          "atributos": {
+                            "lexema": "2",
+                            "tipo_numero": "inteiro"
+                          },
+                          "coluna": 14,
+                          "coluna_fim": 15,
+                          "filhos": [],
+                          "linha": 1,
+                          "linha_fim": 1,
+                          "papel": "direita",
+                          "regra": "primario → LITERAL_INTEIRO | LITERAL_DECIMAL",
+                          "tipo": "Numero"
+                        }
+                      ],
+                      "linha": 1,
+                      "linha_fim": 1,
+                      "papel": "direita",
+                      "regra": "soma → termo { ('+' | '-') termo }  |  termo → unario { ('*' | '/') unario }",
+                      "tipo": "OperacaoBinaria"
+                    }
+                  ],
+                  "linha": 1,
+                  "linha_fim": 1,
+                  "papel": "valor",
+                  "regra": "soma → termo { ('+' | '-') termo }  |  termo → unario { ('*' | '/') unario }",
+                  "tipo": "OperacaoBinaria"
+                }
+              ],
+              "linha": 1,
+              "linha_fim": 1,
+              "papel": "comando",
+              "regra": "atribuicao → IDENTIFICADOR '=' expressao",
+              "tipo": "Atribuicao"
+            },
+            {
+              "atributos": {},
+              "coluna": 1,
+              "coluna_fim": 11,
+              "filhos": [
+                {
+                  "atributos": {
+                    "categoria": "relacional",
+                    "operador": ">"
+                  },
+                  "coluna": 4,
+                  "coluna_fim": 9,
+                  "filhos": [
+                    {
+                      "atributos": {
+                        "nome": "x"
+                      },
+                      "coluna": 4,
+                      "coluna_fim": 5,
+                      "filhos": [],
+                      "linha": 2,
+                      "linha_fim": 2,
+                      "papel": "esquerda",
+                      "regra": "primario → IDENTIFICADOR",
+                      "tipo": "Identificador"
+                    },
+                    {
+                      "atributos": {
+                        "lexema": "3",
+                        "tipo_numero": "inteiro"
+                      },
+                      "coluna": 8,
+                      "coluna_fim": 9,
+                      "filhos": [],
+                      "linha": 2,
+                      "linha_fim": 2,
+                      "papel": "direita",
+                      "regra": "primario → LITERAL_INTEIRO | LITERAL_DECIMAL",
+                      "tipo": "Numero"
+                    }
+                  ],
+                  "linha": 2,
+                  "linha_fim": 2,
+                  "papel": "condicao",
+                  "regra": "expressao → soma [ OPERADOR_RELACIONAL soma ]",
+                  "tipo": "Comparacao"
+                },
+                {
+                  "atributos": {},
+                  "coluna": 5,
+                  "coluna_fim": 20,
+                  "filhos": [
+                    {
+                      "atributos": {},
+                      "coluna": 5,
+                      "coluna_fim": 20,
+                      "filhos": [
+                        {
+                          "atributos": {
+                            "nome": "y"
+                          },
+                          "coluna": 5,
+                          "coluna_fim": 6,
+                          "filhos": [],
+                          "linha": 3,
+                          "linha_fim": 3,
+                          "papel": "alvo",
+                          "regra": "primario → IDENTIFICADOR",
+                          "tipo": "Identificador"
+                        },
+                        {
+                          "atributos": {
+                            "categoria": "aritmetica",
+                            "operador": "/"
+                          },
+                          "coluna": 10,
+                          "coluna_fim": 20,
+                          "filhos": [
+                            {
+                              "atributos": {
+                                "categoria": "aritmetica",
+                                "operador": "-"
+                              },
+                              "coluna": 10,
+                              "coluna_fim": 15,
+                              "filhos": [
+                                {
+                                  "atributos": {
+                                    "nome": "x"
+                                  },
+                                  "coluna": 10,
+                                  "coluna_fim": 11,
+                                  "filhos": [],
+                                  "linha": 3,
+                                  "linha_fim": 3,
+                                  "papel": "esquerda",
+                                  "regra": "primario → IDENTIFICADOR",
+                                  "tipo": "Identificador"
+                                },
+                                {
+                                  "atributos": {
+                                    "lexema": "1",
+                                    "tipo_numero": "inteiro"
+                                  },
+                                  "coluna": 14,
+                                  "coluna_fim": 15,
+                                  "filhos": [],
+                                  "linha": 3,
+                                  "linha_fim": 3,
+                                  "papel": "direita",
+                                  "regra": "primario → LITERAL_INTEIRO | LITERAL_DECIMAL",
+                                  "tipo": "Numero"
+                                }
+                              ],
+                              "linha": 3,
+                              "linha_fim": 3,
+                              "papel": "esquerda",
+                              "regra": "soma → termo { ('+' | '-') termo }  |  termo → unario { ('*' | '/') unario }",
+                              "tipo": "OperacaoBinaria"
+                            },
+                            {
+                              "atributos": {
+                                "lexema": "2",
+                                "tipo_numero": "inteiro"
+                              },
+                              "coluna": 19,
+                              "coluna_fim": 20,
+                              "filhos": [],
+                              "linha": 3,
+                              "linha_fim": 3,
+                              "papel": "direita",
+                              "regra": "primario → LITERAL_INTEIRO | LITERAL_DECIMAL",
+                              "tipo": "Numero"
+                            }
+                          ],
+                          "linha": 3,
+                          "linha_fim": 3,
+                          "papel": "valor",
+                          "regra": "soma → termo { ('+' | '-') termo }  |  termo → unario { ('*' | '/') unario }",
+                          "tipo": "OperacaoBinaria"
+                        }
+                      ],
+                      "linha": 3,
+                      "linha_fim": 3,
+                      "papel": "comando",
+                      "regra": "atribuicao → IDENTIFICADOR '=' expressao",
+                      "tipo": "Atribuicao"
+                    }
+                  ],
+                  "linha": 3,
+                  "linha_fim": 3,
+                  "papel": "entao",
+                  "regra": "bloco → NEWLINE INDENT comando { comando } DEDENT",
+                  "tipo": "Bloco"
+                },
+                {
+                  "atributos": {},
+                  "coluna": 5,
+                  "coluna_fim": 11,
+                  "filhos": [
+                    {
+                      "atributos": {},
+                      "coluna": 5,
+                      "coluna_fim": 11,
+                      "filhos": [
+                        {
+                          "atributos": {
+                            "nome": "y"
+                          },
+                          "coluna": 5,
+                          "coluna_fim": 6,
+                          "filhos": [],
+                          "linha": 5,
+                          "linha_fim": 5,
+                          "papel": "alvo",
+                          "regra": "primario → IDENTIFICADOR",
+                          "tipo": "Identificador"
+                        },
+                        {
+                          "atributos": {
+                            "operador": "-"
+                          },
+                          "coluna": 9,
+                          "coluna_fim": 11,
+                          "filhos": [
+                            {
+                              "atributos": {
+                                "nome": "x"
+                              },
+                              "coluna": 10,
+                              "coluna_fim": 11,
+                              "filhos": [],
+                              "linha": 5,
+                              "linha_fim": 5,
+                              "papel": "operando",
+                              "regra": "primario → IDENTIFICADOR",
+                              "tipo": "Identificador"
+                            }
+                          ],
+                          "linha": 5,
+                          "linha_fim": 5,
+                          "papel": "valor",
+                          "regra": "unario → ('+' | '-') unario",
+                          "tipo": "OperacaoUnaria"
+                        }
+                      ],
+                      "linha": 5,
+                      "linha_fim": 5,
+                      "papel": "comando",
+                      "regra": "atribuicao → IDENTIFICADOR '=' expressao",
+                      "tipo": "Atribuicao"
+                    }
+                  ],
+                  "linha": 5,
+                  "linha_fim": 5,
+                  "papel": "senao",
+                  "regra": "bloco → NEWLINE INDENT comando { comando } DEDENT",
+                  "tipo": "Bloco"
+                }
+              ],
+              "linha": 2,
+              "linha_fim": 5,
+              "papel": "comando",
+              "regra": "condicional → 'if' expressao ':' bloco [ 'else' ':' bloco ]",
+              "tipo": "Condicional"
+            }
+          ],
+          "linha": 1,
+          "linha_fim": 5,
+          "papel": null,
+          "regra": "programa → { comando } FIM_DE_ARQUIVO",
+          "tipo": "Programa"
+        },
+        "derivacao": {
+          "filhos": [
+            {
+              "filhos": [
+                {
+                  "filhos": [
+                    {
+                      "filhos": [
+                        {
+                          "coluna": 1,
+                          "lexema": "x",
+                          "linha": 1,
+                          "simbolo": "IDENTIFICADOR",
+                          "terminal": true,
+                          "tipo": "IDENTIFICADOR"
+                        },
+                        {
+                          "coluna": 3,
+                          "lexema": "=",
+                          "linha": 1,
+                          "simbolo": "=",
+                          "terminal": true,
+                          "tipo": "OPERADOR_ATRIBUICAO"
+                        },
+                        {
+                          "filhos": [
+                            {
+                              "filhos": [
+                                {
+                                  "filhos": [
+                                    {
+                                      "filhos": [
+                                        {
+                                          "filhos": [
+                                            {
+                                              "coluna": 5,
+                                              "lexema": "10",
+                                              "linha": 1,
+                                              "simbolo": "LITERAL_INTEIRO",
+                                              "terminal": true,
+                                              "tipo": "LITERAL_INTEIRO"
+                                            }
+                                          ],
+                                          "simbolo": "primario"
+                                        }
+                                      ],
+                                      "simbolo": "unario"
+                                    }
+                                  ],
+                                  "simbolo": "termo"
+                                },
+                                {
+                                  "coluna": 8,
+                                  "lexema": "+",
+                                  "linha": 1,
+                                  "simbolo": "+",
+                                  "terminal": true,
+                                  "tipo": "OPERADOR_ARITMETICO"
+                                },
+                                {
+                                  "filhos": [
+                                    {
+                                      "filhos": [
+                                        {
+                                          "filhos": [
+                                            {
+                                              "coluna": 10,
+                                              "lexema": "5",
+                                              "linha": 1,
+                                              "simbolo": "LITERAL_INTEIRO",
+                                              "terminal": true,
+                                              "tipo": "LITERAL_INTEIRO"
+                                            }
+                                          ],
+                                          "simbolo": "primario"
+                                        }
+                                      ],
+                                      "simbolo": "unario"
+                                    },
+                                    {
+                                      "coluna": 12,
+                                      "lexema": "*",
+                                      "linha": 1,
+                                      "simbolo": "*",
+                                      "terminal": true,
+                                      "tipo": "OPERADOR_ARITMETICO"
+                                    },
+                                    {
+                                      "filhos": [
+                                        {
+                                          "filhos": [
+                                            {
+                                              "coluna": 14,
+                                              "lexema": "2",
+                                              "linha": 1,
+                                              "simbolo": "LITERAL_INTEIRO",
+                                              "terminal": true,
+                                              "tipo": "LITERAL_INTEIRO"
+                                            }
+                                          ],
+                                          "simbolo": "primario"
+                                        }
+                                      ],
+                                      "simbolo": "unario"
+                                    }
+                                  ],
+                                  "simbolo": "termo"
+                                }
+                              ],
+                              "simbolo": "soma"
+                            }
+                          ],
+                          "simbolo": "expressao"
+                        }
+                      ],
+                      "simbolo": "atribuicao"
+                    },
+                    {
+                      "coluna": 15,
+                      "lexema": "\n",
+                      "linha": 1,
+                      "simbolo": "NEWLINE",
+                      "terminal": true,
+                      "tipo": "NEWLINE"
+                    }
+                  ],
+                  "simbolo": "comando_simples"
+                }
+              ],
+              "simbolo": "comando"
+            },
+            {
+              "filhos": [
+                {
+                  "filhos": [
+                    {
+                      "coluna": 1,
+                      "lexema": "if",
+                      "linha": 2,
+                      "simbolo": "if",
+                      "terminal": true,
+                      "tipo": "PALAVRA_RESERVADA"
+                    },
+                    {
+                      "filhos": [
+                        {
+                          "filhos": [
+                            {
+                              "filhos": [
+                                {
+                                  "filhos": [
+                                    {
+                                      "filhos": [
+                                        {
+                                          "coluna": 4,
+                                          "lexema": "x",
+                                          "linha": 2,
+                                          "simbolo": "IDENTIFICADOR",
+                                          "terminal": true,
+                                          "tipo": "IDENTIFICADOR"
+                                        }
+                                      ],
+                                      "simbolo": "primario"
+                                    }
+                                  ],
+                                  "simbolo": "unario"
+                                }
+                              ],
+                              "simbolo": "termo"
+                            }
+                          ],
+                          "simbolo": "soma"
+                        },
+                        {
+                          "coluna": 6,
+                          "lexema": ">",
+                          "linha": 2,
+                          "simbolo": "OPERADOR_RELACIONAL",
+                          "terminal": true,
+                          "tipo": "OPERADOR_RELACIONAL"
+                        },
+                        {
+                          "filhos": [
+                            {
+                              "filhos": [
+                                {
+                                  "filhos": [
+                                    {
+                                      "filhos": [
+                                        {
+                                          "coluna": 8,
+                                          "lexema": "3",
+                                          "linha": 2,
+                                          "simbolo": "LITERAL_INTEIRO",
+                                          "terminal": true,
+                                          "tipo": "LITERAL_INTEIRO"
+                                        }
+                                      ],
+                                      "simbolo": "primario"
+                                    }
+                                  ],
+                                  "simbolo": "unario"
+                                }
+                              ],
+                              "simbolo": "termo"
+                            }
+                          ],
+                          "simbolo": "soma"
+                        }
+                      ],
+                      "simbolo": "expressao"
+                    },
+                    {
+                      "coluna": 9,
+                      "lexema": ":",
+                      "linha": 2,
+                      "simbolo": ":",
+                      "terminal": true,
+                      "tipo": "DELIMITADOR"
+                    },
+                    {
+                      "filhos": [
+                        {
+                          "coluna": 10,
+                          "lexema": "\n",
+                          "linha": 2,
+                          "simbolo": "NEWLINE",
+                          "terminal": true,
+                          "tipo": "NEWLINE"
+                        },
+                        {
+                          "coluna": 1,
+                          "lexema": "    ",
+                          "linha": 3,
+                          "simbolo": "INDENT",
+                          "terminal": true,
+                          "tipo": "INDENT"
+                        },
+                        {
+                          "filhos": [
+                            {
+                              "filhos": [
+                                {
+                                  "filhos": [
+                                    {
+                                      "coluna": 5,
+                                      "lexema": "y",
+                                      "linha": 3,
+                                      "simbolo": "IDENTIFICADOR",
+                                      "terminal": true,
+                                      "tipo": "IDENTIFICADOR"
+                                    },
+                                    {
+                                      "coluna": 7,
+                                      "lexema": "=",
+                                      "linha": 3,
+                                      "simbolo": "=",
+                                      "terminal": true,
+                                      "tipo": "OPERADOR_ATRIBUICAO"
+                                    },
+                                    {
+                                      "filhos": [
+                                        {
+                                          "filhos": [
+                                            {
+                                              "filhos": [
+                                                {
+                                                  "filhos": [
+                                                    {
+                                                      "filhos": [
+                                                        {
+                                                          "coluna": 9,
+                                                          "lexema": "(",
+                                                          "linha": 3,
+                                                          "simbolo": "(",
+                                                          "terminal": true,
+                                                          "tipo": "DELIMITADOR"
+                                                        },
+                                                        {
+                                                          "filhos": [
+                                                            {
+                                                              "filhos": [
+                                                                {
+                                                                  "filhos": [
+                                                                    {
+                                                                      "filhos": [
+                                                                        {
+                                                                          "filhos": [
+                                                                            {
+                                                                              "coluna": 10,
+                                                                              "lexema": "x",
+                                                                              "linha": 3,
+                                                                              "simbolo": "IDENTIFICADOR",
+                                                                              "terminal": true,
+                                                                              "tipo": "IDENTIFICADOR"
+                                                                            }
+                                                                          ],
+                                                                          "simbolo": "primario"
+                                                                        }
+                                                                      ],
+                                                                      "simbolo": "unario"
+                                                                    }
+                                                                  ],
+                                                                  "simbolo": "termo"
+                                                                },
+                                                                {
+                                                                  "coluna": 12,
+                                                                  "lexema": "-",
+                                                                  "linha": 3,
+                                                                  "simbolo": "-",
+                                                                  "terminal": true,
+                                                                  "tipo": "OPERADOR_ARITMETICO"
+                                                                },
+                                                                {
+                                                                  "filhos": [
+                                                                    {
+                                                                      "filhos": [
+                                                                        {
+                                                                          "filhos": [
+                                                                            {
+                                                                              "coluna": 14,
+                                                                              "lexema": "1",
+                                                                              "linha": 3,
+                                                                              "simbolo": "LITERAL_INTEIRO",
+                                                                              "terminal": true,
+                                                                              "tipo": "LITERAL_INTEIRO"
+                                                                            }
+                                                                          ],
+                                                                          "simbolo": "primario"
+                                                                        }
+                                                                      ],
+                                                                      "simbolo": "unario"
+                                                                    }
+                                                                  ],
+                                                                  "simbolo": "termo"
+                                                                }
+                                                              ],
+                                                              "simbolo": "soma"
+                                                            }
+                                                          ],
+                                                          "simbolo": "expressao"
+                                                        },
+                                                        {
+                                                          "coluna": 15,
+                                                          "lexema": ")",
+                                                          "linha": 3,
+                                                          "simbolo": ")",
+                                                          "terminal": true,
+                                                          "tipo": "DELIMITADOR"
+                                                        }
+                                                      ],
+                                                      "simbolo": "primario"
+                                                    }
+                                                  ],
+                                                  "simbolo": "unario"
+                                                },
+                                                {
+                                                  "coluna": 17,
+                                                  "lexema": "/",
+                                                  "linha": 3,
+                                                  "simbolo": "/",
+                                                  "terminal": true,
+                                                  "tipo": "OPERADOR_ARITMETICO"
+                                                },
+                                                {
+                                                  "filhos": [
+                                                    {
+                                                      "filhos": [
+                                                        {
+                                                          "coluna": 19,
+                                                          "lexema": "2",
+                                                          "linha": 3,
+                                                          "simbolo": "LITERAL_INTEIRO",
+                                                          "terminal": true,
+                                                          "tipo": "LITERAL_INTEIRO"
+                                                        }
+                                                      ],
+                                                      "simbolo": "primario"
+                                                    }
+                                                  ],
+                                                  "simbolo": "unario"
+                                                }
+                                              ],
+                                              "simbolo": "termo"
+                                            }
+                                          ],
+                                          "simbolo": "soma"
+                                        }
+                                      ],
+                                      "simbolo": "expressao"
+                                    }
+                                  ],
+                                  "simbolo": "atribuicao"
+                                },
+                                {
+                                  "coluna": 20,
+                                  "lexema": "\n",
+                                  "linha": 3,
+                                  "simbolo": "NEWLINE",
+                                  "terminal": true,
+                                  "tipo": "NEWLINE"
+                                }
+                              ],
+                              "simbolo": "comando_simples"
+                            }
+                          ],
+                          "simbolo": "comando"
+                        },
+                        {
+                          "coluna": 1,
+                          "lexema": "",
+                          "linha": 4,
+                          "simbolo": "DEDENT",
+                          "terminal": true,
+                          "tipo": "DEDENT"
+                        }
+                      ],
+                      "simbolo": "bloco"
+                    },
+                    {
+                      "coluna": 1,
+                      "lexema": "else",
+                      "linha": 4,
+                      "simbolo": "else",
+                      "terminal": true,
+                      "tipo": "PALAVRA_RESERVADA"
+                    },
+                    {
+                      "coluna": 5,
+                      "lexema": ":",
+                      "linha": 4,
+                      "simbolo": ":",
+                      "terminal": true,
+                      "tipo": "DELIMITADOR"
+                    },
+                    {
+                      "filhos": [
+                        {
+                          "coluna": 6,
+                          "lexema": "\n",
+                          "linha": 4,
+                          "simbolo": "NEWLINE",
+                          "terminal": true,
+                          "tipo": "NEWLINE"
+                        },
+                        {
+                          "coluna": 1,
+                          "lexema": "    ",
+                          "linha": 5,
+                          "simbolo": "INDENT",
+                          "terminal": true,
+                          "tipo": "INDENT"
+                        },
+                        {
+                          "filhos": [
+                            {
+                              "filhos": [
+                                {
+                                  "filhos": [
+                                    {
+                                      "coluna": 5,
+                                      "lexema": "y",
+                                      "linha": 5,
+                                      "simbolo": "IDENTIFICADOR",
+                                      "terminal": true,
+                                      "tipo": "IDENTIFICADOR"
+                                    },
+                                    {
+                                      "coluna": 7,
+                                      "lexema": "=",
+                                      "linha": 5,
+                                      "simbolo": "=",
+                                      "terminal": true,
+                                      "tipo": "OPERADOR_ATRIBUICAO"
+                                    },
+                                    {
+                                      "filhos": [
+                                        {
+                                          "filhos": [
+                                            {
+                                              "filhos": [
+                                                {
+                                                  "filhos": [
+                                                    {
+                                                      "coluna": 9,
+                                                      "lexema": "-",
+                                                      "linha": 5,
+                                                      "simbolo": "-",
+                                                      "terminal": true,
+                                                      "tipo": "OPERADOR_ARITMETICO"
+                                                    },
+                                                    {
+                                                      "filhos": [
+                                                        {
+                                                          "filhos": [
+                                                            {
+                                                              "coluna": 10,
+                                                              "lexema": "x",
+                                                              "linha": 5,
+                                                              "simbolo": "IDENTIFICADOR",
+                                                              "terminal": true,
+                                                              "tipo": "IDENTIFICADOR"
+                                                            }
+                                                          ],
+                                                          "simbolo": "primario"
+                                                        }
+                                                      ],
+                                                      "simbolo": "unario"
+                                                    }
+                                                  ],
+                                                  "simbolo": "unario"
+                                                }
+                                              ],
+                                              "simbolo": "termo"
+                                            }
+                                          ],
+                                          "simbolo": "soma"
+                                        }
+                                      ],
+                                      "simbolo": "expressao"
+                                    }
+                                  ],
+                                  "simbolo": "atribuicao"
+                                },
+                                {
+                                  "coluna": 11,
+                                  "lexema": "\n",
+                                  "linha": 5,
+                                  "simbolo": "NEWLINE",
+                                  "terminal": true,
+                                  "tipo": "NEWLINE"
+                                }
+                              ],
+                              "simbolo": "comando_simples"
+                            }
+                          ],
+                          "simbolo": "comando"
+                        },
+                        {
+                          "coluna": 1,
+                          "lexema": "",
+                          "linha": 6,
+                          "simbolo": "DEDENT",
+                          "terminal": true,
+                          "tipo": "DEDENT"
+                        }
+                      ],
+                      "simbolo": "bloco"
+                    }
+                  ],
+                  "simbolo": "condicional"
+                }
+              ],
+              "simbolo": "comando"
+            },
+            {
+              "coluna": 1,
+              "lexema": "",
+              "linha": 6,
+              "simbolo": "FIM_DE_ARQUIVO",
+              "terminal": true,
+              "tipo": "FIM_DE_ARQUIVO"
+            }
+          ],
+          "simbolo": "programa"
+        },
+        "erros": [],
+        "executado": true,
+        "mensagem": "Análise sintática concluída sem erros.",
+        "resumo": {
+          "altura": 7,
+          "erros_omitidos": 0,
+          "por_tipo": {
+            "Atribuicao": 3,
+            "Bloco": 2,
+            "Comparacao": 1,
+            "Condicional": 1,
+            "Identificador": 6,
+            "Numero": 6,
+            "OperacaoBinaria": 4,
+            "OperacaoUnaria": 1,
+            "Programa": 1
+          },
+          "total_erros": 0,
+          "total_nos": 25
+        },
+        "sucesso": true
+      },
+      "sucesso": true,
+      "tokens": [
+        {
+          "coluna": 1,
+          "lexema": "x",
+          "linha": 1,
+          "tipo": "IDENTIFICADOR"
+        },
+        {
+          "coluna": 3,
+          "lexema": "=",
+          "linha": 1,
+          "tipo": "OPERADOR_ATRIBUICAO"
+        },
+        {
+          "coluna": 5,
+          "lexema": "10",
+          "linha": 1,
+          "tipo": "LITERAL_INTEIRO"
+        },
+        {
+          "coluna": 8,
+          "lexema": "+",
+          "linha": 1,
+          "tipo": "OPERADOR_ARITMETICO"
+        },
+        {
+          "coluna": 10,
+          "lexema": "5",
+          "linha": 1,
+          "tipo": "LITERAL_INTEIRO"
+        },
+        {
+          "coluna": 12,
+          "lexema": "*",
+          "linha": 1,
+          "tipo": "OPERADOR_ARITMETICO"
+        },
+        {
+          "coluna": 14,
+          "lexema": "2",
+          "linha": 1,
+          "tipo": "LITERAL_INTEIRO"
+        },
+        {
+          "coluna": 15,
+          "lexema": "\n",
+          "linha": 1,
+          "tipo": "NEWLINE"
+        },
+        {
+          "coluna": 1,
+          "lexema": "if",
+          "linha": 2,
+          "tipo": "PALAVRA_RESERVADA"
+        },
+        {
+          "coluna": 4,
+          "lexema": "x",
+          "linha": 2,
+          "tipo": "IDENTIFICADOR"
+        },
+        {
+          "coluna": 6,
+          "lexema": ">",
+          "linha": 2,
+          "tipo": "OPERADOR_RELACIONAL"
+        },
+        {
+          "coluna": 8,
+          "lexema": "3",
+          "linha": 2,
+          "tipo": "LITERAL_INTEIRO"
+        },
+        {
+          "coluna": 9,
+          "lexema": ":",
+          "linha": 2,
+          "tipo": "DELIMITADOR"
+        },
+        {
+          "coluna": 10,
+          "lexema": "\n",
+          "linha": 2,
+          "tipo": "NEWLINE"
+        },
+        {
+          "coluna": 1,
+          "lexema": "    ",
+          "linha": 3,
+          "tipo": "INDENT"
+        },
+        {
+          "coluna": 5,
+          "lexema": "y",
+          "linha": 3,
+          "tipo": "IDENTIFICADOR"
+        },
+        {
+          "coluna": 7,
+          "lexema": "=",
+          "linha": 3,
+          "tipo": "OPERADOR_ATRIBUICAO"
+        },
+        {
+          "coluna": 9,
+          "lexema": "(",
+          "linha": 3,
+          "tipo": "DELIMITADOR"
+        },
+        {
+          "coluna": 10,
+          "lexema": "x",
+          "linha": 3,
+          "tipo": "IDENTIFICADOR"
+        },
+        {
+          "coluna": 12,
+          "lexema": "-",
+          "linha": 3,
+          "tipo": "OPERADOR_ARITMETICO"
+        },
+        {
+          "coluna": 14,
+          "lexema": "1",
+          "linha": 3,
+          "tipo": "LITERAL_INTEIRO"
+        },
+        {
+          "coluna": 15,
+          "lexema": ")",
+          "linha": 3,
+          "tipo": "DELIMITADOR"
+        },
+        {
+          "coluna": 17,
+          "lexema": "/",
+          "linha": 3,
+          "tipo": "OPERADOR_ARITMETICO"
+        },
+        {
+          "coluna": 19,
+          "lexema": "2",
+          "linha": 3,
+          "tipo": "LITERAL_INTEIRO"
+        },
+        {
+          "coluna": 20,
+          "lexema": "\n",
+          "linha": 3,
+          "tipo": "NEWLINE"
+        },
+        {
+          "coluna": 1,
+          "lexema": "",
+          "linha": 4,
+          "tipo": "DEDENT"
+        },
+        {
+          "coluna": 1,
+          "lexema": "else",
+          "linha": 4,
+          "tipo": "PALAVRA_RESERVADA"
+        },
+        {
+          "coluna": 5,
+          "lexema": ":",
+          "linha": 4,
+          "tipo": "DELIMITADOR"
+        },
+        {
+          "coluna": 6,
+          "lexema": "\n",
+          "linha": 4,
+          "tipo": "NEWLINE"
+        },
+        {
+          "coluna": 1,
+          "lexema": "    ",
+          "linha": 5,
+          "tipo": "INDENT"
+        },
+        {
+          "coluna": 5,
+          "lexema": "y",
+          "linha": 5,
+          "tipo": "IDENTIFICADOR"
+        },
+        {
+          "coluna": 7,
+          "lexema": "=",
+          "linha": 5,
+          "tipo": "OPERADOR_ATRIBUICAO"
+        },
+        {
+          "coluna": 9,
+          "lexema": "-",
+          "linha": 5,
+          "tipo": "OPERADOR_ARITMETICO"
+        },
+        {
+          "coluna": 10,
+          "lexema": "x",
+          "linha": 5,
+          "tipo": "IDENTIFICADOR"
+        },
+        {
+          "coluna": 11,
+          "lexema": "\n",
+          "linha": 5,
+          "tipo": "NEWLINE"
+        },
+        {
+          "coluna": 1,
+          "lexema": "",
+          "linha": 6,
+          "tipo": "DEDENT"
+        },
+        {
+          "coluna": 1,
+          "lexema": "",
+          "linha": 6,
+          "tipo": "FIM_DE_ARQUIVO"
+        }
+      ]
+    }
+  },
   "tabulacao": {
     "codigo": "if x:\n\ty = 1\n",
     "resposta": {
@@ -407,6 +2951,103 @@
           "tipo": "ERRO_LEXICO"
         }
       ],
+      "lexico": {
+        "avisos": [],
+        "erros": [
+          {
+            "coluna": 1,
+            "lexema": "\t",
+            "linha": 2,
+            "mensagem": "Tabulação na indentação. Use espaços (4 por nível) para que a indentação seja a mesma em qualquer editor.",
+            "tipo": "ERRO_LEXICO"
+          }
+        ],
+        "resumo": {
+          "erros_omitidos": 0,
+          "por_tipo": {
+            "DEDENT": 1,
+            "DELIMITADOR": 1,
+            "FIM_DE_ARQUIVO": 1,
+            "IDENTIFICADOR": 2,
+            "INDENT": 1,
+            "LITERAL_INTEIRO": 1,
+            "NEWLINE": 2,
+            "OPERADOR_ATRIBUICAO": 1,
+            "PALAVRA_RESERVADA": 1
+          },
+          "total_erros": 1,
+          "total_tokens": 11
+        },
+        "sucesso": false,
+        "tokens": [
+          {
+            "coluna": 1,
+            "lexema": "if",
+            "linha": 1,
+            "tipo": "PALAVRA_RESERVADA"
+          },
+          {
+            "coluna": 4,
+            "lexema": "x",
+            "linha": 1,
+            "tipo": "IDENTIFICADOR"
+          },
+          {
+            "coluna": 5,
+            "lexema": ":",
+            "linha": 1,
+            "tipo": "DELIMITADOR"
+          },
+          {
+            "coluna": 6,
+            "lexema": "\n",
+            "linha": 1,
+            "tipo": "NEWLINE"
+          },
+          {
+            "coluna": 1,
+            "lexema": "\t",
+            "linha": 2,
+            "tipo": "INDENT"
+          },
+          {
+            "coluna": 2,
+            "lexema": "y",
+            "linha": 2,
+            "tipo": "IDENTIFICADOR"
+          },
+          {
+            "coluna": 4,
+            "lexema": "=",
+            "linha": 2,
+            "tipo": "OPERADOR_ATRIBUICAO"
+          },
+          {
+            "coluna": 6,
+            "lexema": "1",
+            "linha": 2,
+            "tipo": "LITERAL_INTEIRO"
+          },
+          {
+            "coluna": 7,
+            "lexema": "\n",
+            "linha": 2,
+            "tipo": "NEWLINE"
+          },
+          {
+            "coluna": 1,
+            "lexema": "",
+            "linha": 3,
+            "tipo": "DEDENT"
+          },
+          {
+            "coluna": 1,
+            "lexema": "",
+            "linha": 3,
+            "tipo": "FIM_DE_ARQUIVO"
+          }
+        ]
+      },
       "linhas": 2,
       "mensagem": "Análise léxica concluída com 1 erro léxico.",
       "recebido": true,
@@ -425,6 +3066,18 @@
         },
         "total_erros": 1,
         "total_tokens": 11
+      },
+      "sintatico": {
+        "ast": null,
+        "derivacao": null,
+        "erros": [],
+        "executado": false,
+        "mensagem": "A análise sintática não foi executada porque há erros léxicos. Corrija-os primeiro: o parser só trabalha com uma sequência de tokens válida.",
+        "resumo": {
+          "erros_omitidos": 0,
+          "total_erros": 0
+        },
+        "sucesso": false
       },
       "sucesso": false,
       "tokens": [
@@ -503,6 +3156,145 @@
       "avisos": [],
       "caracteres": 34,
       "erros": [],
+      "lexico": {
+        "avisos": [],
+        "erros": [],
+        "resumo": {
+          "erros_omitidos": 0,
+          "por_tipo": {
+            "DEDENT": 1,
+            "DELIMITADOR": 1,
+            "FIM_DE_ARQUIVO": 1,
+            "IDENTIFICADOR": 4,
+            "INDENT": 1,
+            "LITERAL_INTEIRO": 3,
+            "NEWLINE": 3,
+            "OPERADOR_ARITMETICO": 1,
+            "OPERADOR_ATRIBUICAO": 2,
+            "OPERADOR_RELACIONAL": 1,
+            "PALAVRA_RESERVADA": 1
+          },
+          "total_erros": 0,
+          "total_tokens": 19
+        },
+        "sucesso": true,
+        "tokens": [
+          {
+            "coluna": 1,
+            "lexema": "x",
+            "linha": 1,
+            "tipo": "IDENTIFICADOR"
+          },
+          {
+            "coluna": 3,
+            "lexema": "=",
+            "linha": 1,
+            "tipo": "OPERADOR_ATRIBUICAO"
+          },
+          {
+            "coluna": 5,
+            "lexema": "10",
+            "linha": 1,
+            "tipo": "LITERAL_INTEIRO"
+          },
+          {
+            "coluna": 7,
+            "lexema": "\n",
+            "linha": 1,
+            "tipo": "NEWLINE"
+          },
+          {
+            "coluna": 1,
+            "lexema": "while",
+            "linha": 2,
+            "tipo": "PALAVRA_RESERVADA"
+          },
+          {
+            "coluna": 7,
+            "lexema": "x",
+            "linha": 2,
+            "tipo": "IDENTIFICADOR"
+          },
+          {
+            "coluna": 9,
+            "lexema": ">",
+            "linha": 2,
+            "tipo": "OPERADOR_RELACIONAL"
+          },
+          {
+            "coluna": 11,
+            "lexema": "0",
+            "linha": 2,
+            "tipo": "LITERAL_INTEIRO"
+          },
+          {
+            "coluna": 12,
+            "lexema": ":",
+            "linha": 2,
+            "tipo": "DELIMITADOR"
+          },
+          {
+            "coluna": 13,
+            "lexema": "\n",
+            "linha": 2,
+            "tipo": "NEWLINE"
+          },
+          {
+            "coluna": 1,
+            "lexema": "    ",
+            "linha": 3,
+            "tipo": "INDENT"
+          },
+          {
+            "coluna": 5,
+            "lexema": "x",
+            "linha": 3,
+            "tipo": "IDENTIFICADOR"
+          },
+          {
+            "coluna": 7,
+            "lexema": "=",
+            "linha": 3,
+            "tipo": "OPERADOR_ATRIBUICAO"
+          },
+          {
+            "coluna": 9,
+            "lexema": "x",
+            "linha": 3,
+            "tipo": "IDENTIFICADOR"
+          },
+          {
+            "coluna": 11,
+            "lexema": "-",
+            "linha": 3,
+            "tipo": "OPERADOR_ARITMETICO"
+          },
+          {
+            "coluna": 13,
+            "lexema": "1",
+            "linha": 3,
+            "tipo": "LITERAL_INTEIRO"
+          },
+          {
+            "coluna": 14,
+            "lexema": "\n",
+            "linha": 3,
+            "tipo": "NEWLINE"
+          },
+          {
+            "coluna": 1,
+            "lexema": "",
+            "linha": 4,
+            "tipo": "DEDENT"
+          },
+          {
+            "coluna": 1,
+            "lexema": "",
+            "linha": 4,
+            "tipo": "FIM_DE_ARQUIVO"
+          }
+        ]
+      },
       "linhas": 3,
       "mensagem": "Análise léxica concluída sem erros.",
       "recebido": true,
@@ -523,6 +3315,524 @@
         },
         "total_erros": 0,
         "total_tokens": 19
+      },
+      "sintatico": {
+        "ast": {
+          "atributos": {},
+          "coluna": 1,
+          "coluna_fim": 14,
+          "filhos": [
+            {
+              "atributos": {},
+              "coluna": 1,
+              "coluna_fim": 7,
+              "filhos": [
+                {
+                  "atributos": {
+                    "nome": "x"
+                  },
+                  "coluna": 1,
+                  "coluna_fim": 2,
+                  "filhos": [],
+                  "linha": 1,
+                  "linha_fim": 1,
+                  "papel": "alvo",
+                  "regra": "primario → IDENTIFICADOR",
+                  "tipo": "Identificador"
+                },
+                {
+                  "atributos": {
+                    "lexema": "10",
+                    "tipo_numero": "inteiro"
+                  },
+                  "coluna": 5,
+                  "coluna_fim": 7,
+                  "filhos": [],
+                  "linha": 1,
+                  "linha_fim": 1,
+                  "papel": "valor",
+                  "regra": "primario → LITERAL_INTEIRO | LITERAL_DECIMAL",
+                  "tipo": "Numero"
+                }
+              ],
+              "linha": 1,
+              "linha_fim": 1,
+              "papel": "comando",
+              "regra": "atribuicao → IDENTIFICADOR '=' expressao",
+              "tipo": "Atribuicao"
+            },
+            {
+              "atributos": {},
+              "coluna": 1,
+              "coluna_fim": 14,
+              "filhos": [
+                {
+                  "atributos": {
+                    "categoria": "relacional",
+                    "operador": ">"
+                  },
+                  "coluna": 7,
+                  "coluna_fim": 12,
+                  "filhos": [
+                    {
+                      "atributos": {
+                        "nome": "x"
+                      },
+                      "coluna": 7,
+                      "coluna_fim": 8,
+                      "filhos": [],
+                      "linha": 2,
+                      "linha_fim": 2,
+                      "papel": "esquerda",
+                      "regra": "primario → IDENTIFICADOR",
+                      "tipo": "Identificador"
+                    },
+                    {
+                      "atributos": {
+                        "lexema": "0",
+                        "tipo_numero": "inteiro"
+                      },
+                      "coluna": 11,
+                      "coluna_fim": 12,
+                      "filhos": [],
+                      "linha": 2,
+                      "linha_fim": 2,
+                      "papel": "direita",
+                      "regra": "primario → LITERAL_INTEIRO | LITERAL_DECIMAL",
+                      "tipo": "Numero"
+                    }
+                  ],
+                  "linha": 2,
+                  "linha_fim": 2,
+                  "papel": "condicao",
+                  "regra": "expressao → soma [ OPERADOR_RELACIONAL soma ]",
+                  "tipo": "Comparacao"
+                },
+                {
+                  "atributos": {},
+                  "coluna": 5,
+                  "coluna_fim": 14,
+                  "filhos": [
+                    {
+                      "atributos": {},
+                      "coluna": 5,
+                      "coluna_fim": 14,
+                      "filhos": [
+                        {
+                          "atributos": {
+                            "nome": "x"
+                          },
+                          "coluna": 5,
+                          "coluna_fim": 6,
+                          "filhos": [],
+                          "linha": 3,
+                          "linha_fim": 3,
+                          "papel": "alvo",
+                          "regra": "primario → IDENTIFICADOR",
+                          "tipo": "Identificador"
+                        },
+                        {
+                          "atributos": {
+                            "categoria": "aritmetica",
+                            "operador": "-"
+                          },
+                          "coluna": 9,
+                          "coluna_fim": 14,
+                          "filhos": [
+                            {
+                              "atributos": {
+                                "nome": "x"
+                              },
+                              "coluna": 9,
+                              "coluna_fim": 10,
+                              "filhos": [],
+                              "linha": 3,
+                              "linha_fim": 3,
+                              "papel": "esquerda",
+                              "regra": "primario → IDENTIFICADOR",
+                              "tipo": "Identificador"
+                            },
+                            {
+                              "atributos": {
+                                "lexema": "1",
+                                "tipo_numero": "inteiro"
+                              },
+                              "coluna": 13,
+                              "coluna_fim": 14,
+                              "filhos": [],
+                              "linha": 3,
+                              "linha_fim": 3,
+                              "papel": "direita",
+                              "regra": "primario → LITERAL_INTEIRO | LITERAL_DECIMAL",
+                              "tipo": "Numero"
+                            }
+                          ],
+                          "linha": 3,
+                          "linha_fim": 3,
+                          "papel": "valor",
+                          "regra": "soma → termo { ('+' | '-') termo }  |  termo → unario { ('*' | '/') unario }",
+                          "tipo": "OperacaoBinaria"
+                        }
+                      ],
+                      "linha": 3,
+                      "linha_fim": 3,
+                      "papel": "comando",
+                      "regra": "atribuicao → IDENTIFICADOR '=' expressao",
+                      "tipo": "Atribuicao"
+                    }
+                  ],
+                  "linha": 3,
+                  "linha_fim": 3,
+                  "papel": "corpo",
+                  "regra": "bloco → NEWLINE INDENT comando { comando } DEDENT",
+                  "tipo": "Bloco"
+                }
+              ],
+              "linha": 2,
+              "linha_fim": 3,
+              "papel": "comando",
+              "regra": "repeticao → 'while' expressao ':' bloco",
+              "tipo": "Repeticao"
+            }
+          ],
+          "linha": 1,
+          "linha_fim": 3,
+          "papel": null,
+          "regra": "programa → { comando } FIM_DE_ARQUIVO",
+          "tipo": "Programa"
+        },
+        "derivacao": {
+          "filhos": [
+            {
+              "filhos": [
+                {
+                  "filhos": [
+                    {
+                      "filhos": [
+                        {
+                          "coluna": 1,
+                          "lexema": "x",
+                          "linha": 1,
+                          "simbolo": "IDENTIFICADOR",
+                          "terminal": true,
+                          "tipo": "IDENTIFICADOR"
+                        },
+                        {
+                          "coluna": 3,
+                          "lexema": "=",
+                          "linha": 1,
+                          "simbolo": "=",
+                          "terminal": true,
+                          "tipo": "OPERADOR_ATRIBUICAO"
+                        },
+                        {
+                          "filhos": [
+                            {
+                              "filhos": [
+                                {
+                                  "filhos": [
+                                    {
+                                      "filhos": [
+                                        {
+                                          "filhos": [
+                                            {
+                                              "coluna": 5,
+                                              "lexema": "10",
+                                              "linha": 1,
+                                              "simbolo": "LITERAL_INTEIRO",
+                                              "terminal": true,
+                                              "tipo": "LITERAL_INTEIRO"
+                                            }
+                                          ],
+                                          "simbolo": "primario"
+                                        }
+                                      ],
+                                      "simbolo": "unario"
+                                    }
+                                  ],
+                                  "simbolo": "termo"
+                                }
+                              ],
+                              "simbolo": "soma"
+                            }
+                          ],
+                          "simbolo": "expressao"
+                        }
+                      ],
+                      "simbolo": "atribuicao"
+                    },
+                    {
+                      "coluna": 7,
+                      "lexema": "\n",
+                      "linha": 1,
+                      "simbolo": "NEWLINE",
+                      "terminal": true,
+                      "tipo": "NEWLINE"
+                    }
+                  ],
+                  "simbolo": "comando_simples"
+                }
+              ],
+              "simbolo": "comando"
+            },
+            {
+              "filhos": [
+                {
+                  "filhos": [
+                    {
+                      "coluna": 1,
+                      "lexema": "while",
+                      "linha": 2,
+                      "simbolo": "while",
+                      "terminal": true,
+                      "tipo": "PALAVRA_RESERVADA"
+                    },
+                    {
+                      "filhos": [
+                        {
+                          "filhos": [
+                            {
+                              "filhos": [
+                                {
+                                  "filhos": [
+                                    {
+                                      "filhos": [
+                                        {
+                                          "coluna": 7,
+                                          "lexema": "x",
+                                          "linha": 2,
+                                          "simbolo": "IDENTIFICADOR",
+                                          "terminal": true,
+                                          "tipo": "IDENTIFICADOR"
+                                        }
+                                      ],
+                                      "simbolo": "primario"
+                                    }
+                                  ],
+                                  "simbolo": "unario"
+                                }
+                              ],
+                              "simbolo": "termo"
+                            }
+                          ],
+                          "simbolo": "soma"
+                        },
+                        {
+                          "coluna": 9,
+                          "lexema": ">",
+                          "linha": 2,
+                          "simbolo": "OPERADOR_RELACIONAL",
+                          "terminal": true,
+                          "tipo": "OPERADOR_RELACIONAL"
+                        },
+                        {
+                          "filhos": [
+                            {
+                              "filhos": [
+                                {
+                                  "filhos": [
+                                    {
+                                      "filhos": [
+                                        {
+                                          "coluna": 11,
+                                          "lexema": "0",
+                                          "linha": 2,
+                                          "simbolo": "LITERAL_INTEIRO",
+                                          "terminal": true,
+                                          "tipo": "LITERAL_INTEIRO"
+                                        }
+                                      ],
+                                      "simbolo": "primario"
+                                    }
+                                  ],
+                                  "simbolo": "unario"
+                                }
+                              ],
+                              "simbolo": "termo"
+                            }
+                          ],
+                          "simbolo": "soma"
+                        }
+                      ],
+                      "simbolo": "expressao"
+                    },
+                    {
+                      "coluna": 12,
+                      "lexema": ":",
+                      "linha": 2,
+                      "simbolo": ":",
+                      "terminal": true,
+                      "tipo": "DELIMITADOR"
+                    },
+                    {
+                      "filhos": [
+                        {
+                          "coluna": 13,
+                          "lexema": "\n",
+                          "linha": 2,
+                          "simbolo": "NEWLINE",
+                          "terminal": true,
+                          "tipo": "NEWLINE"
+                        },
+                        {
+                          "coluna": 1,
+                          "lexema": "    ",
+                          "linha": 3,
+                          "simbolo": "INDENT",
+                          "terminal": true,
+                          "tipo": "INDENT"
+                        },
+                        {
+                          "filhos": [
+                            {
+                              "filhos": [
+                                {
+                                  "filhos": [
+                                    {
+                                      "coluna": 5,
+                                      "lexema": "x",
+                                      "linha": 3,
+                                      "simbolo": "IDENTIFICADOR",
+                                      "terminal": true,
+                                      "tipo": "IDENTIFICADOR"
+                                    },
+                                    {
+                                      "coluna": 7,
+                                      "lexema": "=",
+                                      "linha": 3,
+                                      "simbolo": "=",
+                                      "terminal": true,
+                                      "tipo": "OPERADOR_ATRIBUICAO"
+                                    },
+                                    {
+                                      "filhos": [
+                                        {
+                                          "filhos": [
+                                            {
+                                              "filhos": [
+                                                {
+                                                  "filhos": [
+                                                    {
+                                                      "filhos": [
+                                                        {
+                                                          "coluna": 9,
+                                                          "lexema": "x",
+                                                          "linha": 3,
+                                                          "simbolo": "IDENTIFICADOR",
+                                                          "terminal": true,
+                                                          "tipo": "IDENTIFICADOR"
+                                                        }
+                                                      ],
+                                                      "simbolo": "primario"
+                                                    }
+                                                  ],
+                                                  "simbolo": "unario"
+                                                }
+                                              ],
+                                              "simbolo": "termo"
+                                            },
+                                            {
+                                              "coluna": 11,
+                                              "lexema": "-",
+                                              "linha": 3,
+                                              "simbolo": "-",
+                                              "terminal": true,
+                                              "tipo": "OPERADOR_ARITMETICO"
+                                            },
+                                            {
+                                              "filhos": [
+                                                {
+                                                  "filhos": [
+                                                    {
+                                                      "filhos": [
+                                                        {
+                                                          "coluna": 13,
+                                                          "lexema": "1",
+                                                          "linha": 3,
+                                                          "simbolo": "LITERAL_INTEIRO",
+                                                          "terminal": true,
+                                                          "tipo": "LITERAL_INTEIRO"
+                                                        }
+                                                      ],
+                                                      "simbolo": "primario"
+                                                    }
+                                                  ],
+                                                  "simbolo": "unario"
+                                                }
+                                              ],
+                                              "simbolo": "termo"
+                                            }
+                                          ],
+                                          "simbolo": "soma"
+                                        }
+                                      ],
+                                      "simbolo": "expressao"
+                                    }
+                                  ],
+                                  "simbolo": "atribuicao"
+                                },
+                                {
+                                  "coluna": 14,
+                                  "lexema": "\n",
+                                  "linha": 3,
+                                  "simbolo": "NEWLINE",
+                                  "terminal": true,
+                                  "tipo": "NEWLINE"
+                                }
+                              ],
+                              "simbolo": "comando_simples"
+                            }
+                          ],
+                          "simbolo": "comando"
+                        },
+                        {
+                          "coluna": 1,
+                          "lexema": "",
+                          "linha": 4,
+                          "simbolo": "DEDENT",
+                          "terminal": true,
+                          "tipo": "DEDENT"
+                        }
+                      ],
+                      "simbolo": "bloco"
+                    }
+                  ],
+                  "simbolo": "repeticao"
+                }
+              ],
+              "simbolo": "comando"
+            },
+            {
+              "coluna": 1,
+              "lexema": "",
+              "linha": 4,
+              "simbolo": "FIM_DE_ARQUIVO",
+              "terminal": true,
+              "tipo": "FIM_DE_ARQUIVO"
+            }
+          ],
+          "simbolo": "programa"
+        },
+        "erros": [],
+        "executado": true,
+        "mensagem": "Análise sintática concluída sem erros.",
+        "resumo": {
+          "altura": 6,
+          "erros_omitidos": 0,
+          "por_tipo": {
+            "Atribuicao": 2,
+            "Bloco": 1,
+            "Comparacao": 1,
+            "Identificador": 4,
+            "Numero": 3,
+            "OperacaoBinaria": 1,
+            "Programa": 1,
+            "Repeticao": 1
+          },
+          "total_erros": 0,
+          "total_nos": 14
+        },
+        "sucesso": true
       },
       "sucesso": true,
       "tokens": [
