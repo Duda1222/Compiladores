@@ -4,6 +4,7 @@ import { EXEMPLOS, buscarExemplo } from "./exemplos.js";
 import { validarEntrada } from "./validacao.js";
 import { enviarCodigo } from "./api.js";
 import { renderizarLexico } from "./resultado.js";
+import { renderizarSintatico } from "./sintatico.js";
 
 const MSG_PLACEHOLDER = "Os resultados da análise aparecerão aqui.";
 
@@ -95,6 +96,7 @@ export function iniciar(doc = document, opcoes = {}) {
       if (r.tipo === "sucesso") {
         controlePasso?.parar();
         controlePasso = renderizarLexico(doc, el.resultado, r.dados, codigo, opcoes);
+        renderizarSintatico(doc, el.resultado, r.dados, codigo, opcoes);
       } else if (r.tipo === "entrada") {
         mostrar("erro-entrada", "Entrada inválida", [r.mensagem]);
       } else if (r.tipo === "comunicacao") {

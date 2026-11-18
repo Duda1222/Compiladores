@@ -349,3 +349,38 @@ code { font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; 
 @media (prefers-reduced-motion: reduce) {
   .tok { transition: none; }
 }
+
+/* ------------------------------------------------ Etapa 4: análise sintática */
+.bloco--sintatico { border-left: 4px solid var(--primaria); }
+.bloco--sintatico.bloco--sucesso { border-left-color: var(--sucesso-bd); }
+.bloco--sintatico.bloco--erro { border-left-color: var(--erro-bd); }
+.barra-arvore { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin: 0.5rem 0; }
+.barra-arvore label { font-size: 0.9rem; color: var(--suave); }
+.grade-arvore { display: flex; flex-direction: column; gap: 1rem; }
+.grade-arvore__detalhe { order: -1; }
+.lista-erros__item--sintatico .posicao { display: block; margin-bottom: 0.15rem; }
+.no__rotulo { white-space: nowrap; }
+.arvore { overflow-x: auto; }
+.arvore, .no__filhos { list-style: none; margin: 0; padding-left: 1.2rem; }
+.arvore { padding-left: 0; }
+.no__linha { display: flex; align-items: center; gap: 0.25rem; padding: 0.1rem 0; }
+.no__toggle { width: 1.6rem; min-height: 1.6rem; border: 1px solid var(--borda); background: #fff; border-radius: 4px; cursor: pointer; font-family: ui-monospace, Menlo, Consolas, monospace; padding: 0; }
+.no__toggle--folha { border: 0; text-align: center; color: var(--suave); background: none; cursor: default; display: inline-block; }
+.no__rotulo { border: 1px solid transparent; background: none; cursor: pointer; padding: 0.1rem 0.4rem; border-radius: 4px; font: inherit; text-align: left; color: var(--texto); }
+.no__rotulo:hover { background: #eef0ff; }
+.no__rotulo:focus-visible, .no__toggle:focus-visible { outline: 3px solid var(--primaria); outline-offset: 1px; }
+.no__rotulo--selecionado { border: 2px solid var(--primaria); font-weight: 700; }
+.no__papel { color: var(--suave); font-weight: 400; }
+.no__nome { font-family: ui-monospace, Menlo, Consolas, monospace; }
+.no--filtrado > .no__linha .no__nome { text-decoration: underline; text-decoration-thickness: 2px; font-weight: 700; }
+.marca-filtro { color: var(--primaria-escura); font-size: 0.85rem; font-weight: 700; }
+.painel-no { background: #f7f8fd; border: 1px solid var(--borda); border-radius: 8px; padding: 0.5rem 0.75rem; margin-bottom: 0.5rem; }
+.painel-no__titulo { margin: 0 0 0.25rem; font-weight: 700; }
+.detalhes-erro { margin: 0.25rem 0 0; display: grid; grid-template-columns: max-content 1fr; gap: 0.1rem 0.6rem; font-size: 0.9rem; }
+.detalhes-erro dt { font-weight: 700; color: var(--suave); }
+.detalhes-erro dd { margin: 0; overflow-wrap: anywhere; }
+.codigo-no { background: var(--codigo-bg); color: var(--codigo-fg); padding: 0.75rem; border-radius: 8px; overflow-x: auto; margin: 0; font-size: 0.9rem; }
+.trecho-no { background: #ffd479; color: #14172a; border-radius: 3px; padding: 0 1px; outline: 2px solid #ffd479; text-decoration: underline double; }
+.bloco-texto { background: #f7f8fd; border: 1px solid var(--borda); border-radius: 8px; padding: 0.6rem; overflow: auto; max-height: 22rem; font-size: 0.88rem; }
+.alternativa { margin: 0.6rem 0; }
+.lista-erros__item--sintatico { display: block; }

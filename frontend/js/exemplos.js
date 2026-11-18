@@ -30,7 +30,7 @@ export const EXEMPLOS = [
     id: "erro-intencional",
     titulo: "5. Com erro intencional",
     demonstra:
-      "Tokens válidos, mas estrutura incorreta (expressão incompleta, parêntese sem fechar). O scanner tokeniza normalmente; o erro será apontado pelo parser na Etapa 4.",
+      "Tokens válidos, mas estrutura incorreta (expressão incompleta, parêntese sem fechar). O scanner tokeniza normalmente; o parser aponta os dois erros (operando faltando e parêntese sem fechar).",
     codigo: "x = 10 +\ny = (3 * 4\n",
   },
   {
@@ -62,6 +62,21 @@ export const EXEMPLOS = [
       "Caractere inválido (@), número malformado (3.14.15 e 12abc), string (ainda fora do subconjunto) e palavra reservada fora do subconjunto (def).",
     codigo:
       "preco = 10 @ 2\nvalor = 3.14.15\nnome = \"Ana\"\ny = 12abc\ndef f\n",
+  },
+  {
+    id: "precedencia",
+    titulo: "10. Precedência e associatividade (AST)",
+    demonstra:
+      "10 + 5 * 2 (a multiplicação fica mais fundo na árvore), 20 - 5 - 3 (associa à esquerda) e (10 + 5) * 2 (parênteses mudam a árvore e somem dela).",
+    codigo: "a = 10 + 5 * 2\nb = 20 - 5 - 3\nc = (10 + 5) * 2\nd = -a + b\n",
+  },
+  {
+    id: "erros-sintaticos",
+    titulo: "11. Com erros sintáticos",
+    demonstra:
+      "Tokens válidos, estrutura inválida: operando faltando, = no lugar de ==, operadores seguidos e else sem if. O parser lista vários erros, com linha e coluna.",
+    codigo:
+      "x = 10 +\nif x = 3:\n    y = 1\nw = 2 * * 3\nelse:\n    v = 1\n",
   },
 ];
 
