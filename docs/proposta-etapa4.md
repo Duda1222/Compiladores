@@ -6,7 +6,7 @@ Resumo do texto entregue na tarefa acadêmica da Etapa 4, mantido no repositóri
 
 ![Arquitetura](img/arquitetura.png)
 
-Fonte do diagrama: [`arquitetura.mmd`](arquitetura.mmd). O navegador fala só com o Nginx (porta 8080); `/api/` é encaminhado ao Flask/Gunicorn (porta 5000), que executa validação, scanner e parser.
+Fonte: [`arquitetura.py`](arquitetura.py) (gera `img/arquitetura.png`). O navegador fala só com o Nginx (porta 8080); `/api/` é encaminhado ao Flask/Gunicorn (porta 5000), que executa validação, scanner e parser.
 
 ## Fluxograma
 
